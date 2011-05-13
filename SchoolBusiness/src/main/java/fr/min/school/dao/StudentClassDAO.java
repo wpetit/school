@@ -44,7 +44,7 @@ public interface StudentClassDAO {
 	List<StudentClassDTO> findAll();
 
 	/**
-	 * Find a student class by its id
+	 * Find a student class by its id.
 	 * 
 	 * @param id
 	 *            the id of the class
@@ -53,7 +53,7 @@ public interface StudentClassDAO {
 	StudentClassDTO findStudentClassDTOById(int id);
 
 	/**
-	 * Find a student class by its name
+	 * Find a student class by its name.
 	 * 
 	 * @param name
 	 *            the name of the class

@@ -14,7 +14,14 @@ import fr.min.school.model.Work;
  * @author minimoi
  * 
  */
-public class StudentDTOBuilder {
+public final class StudentDTOBuilder {
+
+	/**
+	 * No constructor.
+	 */
+	private StudentDTOBuilder() {
+
+	}
 
 	/**
 	 * Build a {@link Student} from a {@link StudentDTO}.
@@ -26,7 +33,7 @@ public class StudentDTOBuilder {
 	public static Student buildStudent(final StudentDTO studentDTO) {
 		final Student student = new Student();
 		student.setId(studentDTO.getId());
-		student.setAge(studentDTO.getAge());
+		student.setBirthday(studentDTO.getBirthday());
 		student.setFirstname(studentDTO.getFirstname());
 		student.setName(studentDTO.getName());
 		return student;
@@ -42,7 +49,7 @@ public class StudentDTOBuilder {
 	public static StudentDTO buildStudentDTO(final Student student) {
 		final StudentDTO studentDTO = new StudentDTO();
 		studentDTO.setId(student.getId());
-		studentDTO.setAge(student.getAge());
+		studentDTO.setBirthday(student.getBirthday());
 		studentDTO.setFirstname(student.getFirstname());
 		studentDTO.setName(student.getName());
 		if (student.getWorks() != null) {

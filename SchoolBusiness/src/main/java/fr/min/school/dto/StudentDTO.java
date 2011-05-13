@@ -4,8 +4,8 @@
 package fr.min.school.dto;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-
 
 /**
  * @author minimoi
@@ -13,13 +13,37 @@ import java.util.List;
  */
 public class StudentDTO {
 
+	/**
+	 * The age of the student.
+	 */
 	private int age;
+	/**
+	 * The firstname of the student.
+	 */
 	private String firstname;
+
+	/**
+	 * The id of the student.
+	 */
 	private int id;
+	/**
+	 * The name of the student.
+	 */
 	private String name;
 
+	/**
+	 * The works the student have done.
+	 */
 	private List<Integer> works;
 
+	/**
+	 * The birthday of the Student.
+	 */
+	private Date birthday;
+
+	/**
+	 * Constructor.
+	 */
 	public StudentDTO() {
 		this.works = new ArrayList<Integer>();
 	}
@@ -97,5 +121,20 @@ public class StudentDTO {
 	 */
 	public void setWorks(final List<Integer> works) {
 		this.works = works;
+	}
+
+	/**
+	 * @return the birthday
+	 */
+	public Date getBirthday() {
+		return this.birthday;
+	}
+
+	/**
+	 * @param birthday
+	 *            the birthday to set
+	 */
+	public void setBirthday(final Date birthday) {
+		this.birthday = birthday;
 	}
 }

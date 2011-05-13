@@ -14,7 +14,13 @@ import fr.min.school.model.StudentClass;
  * @author minimoi
  * 
  */
-public class SchoolDTOBuilder {
+public final class SchoolDTOBuilder {
+
+	/**
+	 * No constructor.
+	 */
+	private SchoolDTOBuilder() {
+	}
 
 	/**
 	 * Build a {@link School} from a {@link SchoolDTO}. Student classes are not
@@ -33,10 +39,11 @@ public class SchoolDTOBuilder {
 	}
 
 	/**
-	 * Build a {@link SchoolDTO} from a {@link School}
+	 * Build a {@link SchoolDTO} from a {@link School}.
 	 * 
 	 * @param school
 	 *            the school to build from
+	 * @return the school dto built
 	 */
 	public static SchoolDTO buildSchoolDTO(final School school) {
 		final SchoolDTO schoolDto = new SchoolDTO();
@@ -51,7 +58,7 @@ public class SchoolDTOBuilder {
 
 	/**
 	 * Build a {@link List} of {@link SchoolDTO} from a {@link List} of
-	 * {@link School}
+	 * {@link School}.
 	 * 
 	 * @param schools
 	 *            the schools to build form

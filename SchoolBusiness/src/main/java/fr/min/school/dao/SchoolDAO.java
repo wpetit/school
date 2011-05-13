@@ -55,7 +55,7 @@ public interface SchoolDAO {
 			throws TechnicalException;
 
 	/**
-	 * Return the school found for this is
+	 * Return the school found for this id.
 	 * 
 	 * @param id
 	 *            the school id

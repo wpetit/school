@@ -19,11 +19,20 @@ import javax.persistence.OneToMany;
 @Entity
 public class StudentClass implements Serializable {
 	/**
-	 * Serial ID
+	 * Serial ID.
 	 */
 	private static final long serialVersionUID = 6156343491842539547L;
+	/**
+	 * The id of the student class.
+	 */
 	private Integer id;
+	/**
+	 * The school year of the class.
+	 */
 	private SchoolYear schoolYear;
+	/**
+	 * The students that belongs to the class.
+	 */
 	private List<Student> students;
 
 	/**
@@ -75,8 +84,8 @@ public class StudentClass implements Serializable {
 		this.students = students;
 	}
 
-	/*
-	 * (non-Javadoc)
+	/**
+	 * {@inheritDoc}
 	 * 
 	 * @see java.lang.Object#toString()
 	 */

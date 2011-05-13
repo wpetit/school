@@ -14,11 +14,22 @@ import fr.min.school.model.SchoolYear;
  */
 public class StudentClassDTO {
 
+	/**
+	 * The id of the student class.
+	 */
 	private Integer id;
+	/**
+	 * The school year.
+	 */
 	private SchoolYear schoolYear;
-
+	/**
+	 * The list of students that belongs to the class.
+	 */
 	private List<Integer> students;
 
+	/**
+	 * Constructor.
+	 */
 	public StudentClassDTO() {
 		this.students = new ArrayList<Integer>();
 	}

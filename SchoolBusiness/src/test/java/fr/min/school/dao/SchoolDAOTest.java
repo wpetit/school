@@ -21,9 +21,14 @@ import fr.min.school.exception.TechnicalException;
  */
 public class SchoolDAOTest extends TestCase {
 
+	/**
+	 * SchoolDao call for tests.
+	 */
 	private SchoolDAO schoolDao;
 
 	/**
+	 * {@inheritDoc}
+	 * 
 	 * @see junit.framework.TestCase#setUp()
 	 */
 	@Override
@@ -35,7 +40,7 @@ public class SchoolDAOTest extends TestCase {
 	}
 
 	/**
-	 * Test method saveOrUpdate of {@link SchoolDAO} with valid school data
+	 * Test method saveOrUpdate of {@link SchoolDAO} with valid school data.
 	 */
 	@Test
 	public void testSaveOrUpdateWithValidSchoolData() {

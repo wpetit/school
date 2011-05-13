@@ -20,60 +20,31 @@ import javax.persistence.OneToMany;
 @Entity
 public class School implements Serializable {
 	/**
-	 * 
-	 */
+     * 
+     */
 	private static final long serialVersionUID = 2485483630021031653L;
+	/**
+	 * The address of the school.
+	 */
 	private String address;
+	/**
+	 * The classes belongs to the school.
+	 */
 	private List<StudentClass> classes;
+	/**
+	 * The id of the school.
+	 */
 	private Integer id;
+	/**
+	 * The name of the school.
+	 */
 	private String name;
 
+	/**
+	 * Constructor of a school.
+	 */
 	public School() {
 		this.classes = new ArrayList<StudentClass>();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(final Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (this.getClass() != obj.getClass()) {
-			return false;
-		}
-		final School other = (School) obj;
-		if (this.address == null) {
-			if (other.address != null) {
-				return false;
-			}
-		} else if (!this.address.equals(other.address)) {
-			return false;
-		}
-		if (this.classes == null) {
-			if (other.classes != null) {
-				return false;
-			}
-		} else if (!this.classes.equals(other.classes)) {
-			return false;
-		}
-		if (this.id != other.id) {
-			return false;
-		}
-		if (this.name == null) {
-			if (other.name != null) {
-				return false;
-			}
-		} else if (!this.name.equals(other.name)) {
-			return false;
-		}
-		return true;
 	}
 
 	/**
@@ -105,25 +76,6 @@ public class School implements Serializable {
 	 */
 	public String getName() {
 		return this.name;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final Integer prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((this.address == null) ? 0 : this.address.hashCode());
-		result = prime * result
-				+ ((this.classes == null) ? 0 : this.classes.hashCode());
-		result = prime * result + this.id;
-		result = prime * result
-				+ ((this.name == null) ? 0 : this.name.hashCode());
-		return result;
 	}
 
 	/**

@@ -17,17 +17,36 @@ import javax.persistence.Id;
 @Entity
 public class SchoolYear implements Serializable {
 	/**
-	 * Serial ID
+	 * Serial ID.
 	 */
 	private static final long serialVersionUID = -1292710296082324419L;
+	/**
+	 * The beginning of the first term.
+	 */
 	private Date firstTermBegin;
+	/**
+	 * The end of the the first term.
+	 */
 	private Date firstTermEnd;
-
+	/**
+	 * The id of the year.
+	 */
 	private Integer id;
-
+	/**
+	 * The beginning of the second term.
+	 */
 	private Date secondTermBegin;
+	/**
+	 * The end of the the second term.
+	 */
 	private Date secondTermEnd;
+	/**
+	 * The beginning of the third term.
+	 */
 	private Date thirdTermBegin;
+	/**
+	 * The end of the the first term.
+	 */
 	private Date thirdTermEnd;
 
 	/**

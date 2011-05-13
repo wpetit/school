@@ -14,11 +14,17 @@ import fr.min.school.model.StudentClass;
  * @author minimoi
  * 
  */
-public class StudentClassDTOBuilder {
+public final class StudentClassDTOBuilder {
+
+	/**
+	 * No constructor.
+	 */
+	private StudentClassDTOBuilder() {
+	}
 
 	/**
 	 * Build a {@link StudentClass} from a {@link StudentClassDTO}. SchoolYear
-	 * and Student are not set by the builder
+	 * and Student are not set by the builder.
 	 * 
 	 * @param studentClassDTO
 	 *            the {@link StudentClassDTO} to build from

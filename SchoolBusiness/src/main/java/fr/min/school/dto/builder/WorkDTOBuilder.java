@@ -14,7 +14,14 @@ import fr.min.school.model.Work;
  * @author minimoi
  * 
  */
-public class WorkDTOBuilder {
+public final class WorkDTOBuilder {
+
+	/**
+	 * No constructor.
+	 */
+	private WorkDTOBuilder() {
+
+	}
 
 	/**
 	 * Build a {@link Work} from a {@link WorkDTO}. Students are not set by the
@@ -27,7 +34,7 @@ public class WorkDTOBuilder {
 	public static Work buildWork(final WorkDTO workDTO) {
 		final Work work = new Work();
 		work.setComment(workDTO.getComment());
-		work.setDone(workDTO.isDone());
+		work.setDate(workDTO.getDate());
 		work.setId(workDTO.getId());
 		work.setMark(workDTO.getMark());
 		work.setName(workDTO.getName());
@@ -44,11 +51,11 @@ public class WorkDTOBuilder {
 	public static WorkDTO buildWorkDTO(final Work work) {
 		final WorkDTO workDTO = new WorkDTO();
 		workDTO.setId(work.getId());
-		workDTO.setDone(work.isDone());
+		workDTO.setDate(work.getDate());
 		workDTO.setComment(work.getComment());
 		workDTO.setMark(work.getMark());
 		if (work.getStudents() != null) {
-			for (final Student student : work.getStudents()) {
+			for (Student student : work.getStudents()) {
 				workDTO.getStudents().add(student.getId());
 			}
 		}
@@ -57,7 +64,7 @@ public class WorkDTOBuilder {
 
 	/**
 	 * Build a {@link List} of {@link WorkDTO} from a {@link List} of
-	 * {@link Work}
+	 * {@link Work}.
 	 * 
 	 * @param works
 	 *            the {@link List} of {@link Work} to build from

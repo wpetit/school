@@ -6,19 +6,32 @@ package fr.min.school.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * @author minimoi
  * 
  */
 public class SchoolDTO {
 
+	/**
+	 * The address of the school.
+	 */
 	private String address;
+	/**
+	 * The classes belong to the school.
+	 */
 	private List<Integer> classes;
+	/**
+	 * The id of the school.
+	 */
 	private int id;
-
+	/**
+	 * The name of the school.
+	 */
 	private String name;
 
+	/**
+	 * Constructor.
+	 */
 	public SchoolDTO() {
 		this.classes = new ArrayList<Integer>();
 	}
