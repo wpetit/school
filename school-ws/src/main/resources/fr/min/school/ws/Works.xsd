@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.min.fr/School/ws/Works/Works"
+	xmlns:tns="http://www.min.fr/School/ws/Works/Works" elementFormDefault="qualified">
+	<element name="GetWorkResults">
+		<complexType>
+			<sequence>
+				<element name="workId" type="int" />
+			</sequence>
+		</complexType>
+	</element>
+	<element name="GetWorkResultsResponse">
+		<complexType>
+			<sequence>
+				<element name="average" type="float" />
+				<element name="studentWork" type="tns:StudentWork"
+					maxOccurs="unbounded" />
+			</sequence>
+		</complexType>
+	</element>
+	<element name="CreateStudentWork">
+		<complexType>
+			<sequence>
+				<element name="studentWork" type="tns:StudentWork" />
+			</sequence>
+		</complexType>
+	</element>
+	<element name="CreateWork">
+	   <complexType>
+	       <sequence>
+	           <element name="work" type="tns:Work"/>    
+	       </sequence>
+	   </complexType>
+	</element>
+	<complexType name="StudentWork">
+		<sequence>
+			<element name="workId" type="int" />
+			<element name="studentId" type="int" />
+			<element name="absent" type="boolean" />
+			<element name="mark" type="float" minOccurs="0" />
+			<element name="comment" type="string" />
+		</sequence>
+	</complexType>
+	<complexType name="Work">
+	   <sequence>
+	       <element name="date" type="date"/>
+	       <element name="disciplineId" type="int"/>
+	       <element name="name" type="string"/>
+	   </sequence>
+	</complexType>
+</schema>

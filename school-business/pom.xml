@@ -1,0 +1,58 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>school</artifactId>
+		<groupId>fr.min.school</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>school-business</artifactId>
+	<name>school-business</name>
+	<description>SchoolBusiness</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>fr.min.school</groupId>
+			<artifactId>school-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>fr.min.school</groupId>
+			<artifactId>school-model</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.dozer</groupId>
+			<artifactId>dozer</artifactId>
+			<version>5.3.2</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>fr.maven.dto</groupId>
+				<artifactId>dto-maven-plugin</artifactId>
+				<version>1.0</version>
+				<executions>
+					<execution>
+						<id>generate-sources</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>dto</goal>
+						</goals>
+						<configuration>
+							<!-- The directory where the DTO classes will be generated, default 
+								value is target/generated-sources -->
+							<generatedDirectory>target/generated</generatedDirectory>
+							<!-- The list of classes you want to generate DTO classes for. -->
+							<includes>
+								<include>fr.min.school.model.*</include>
+							</includes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

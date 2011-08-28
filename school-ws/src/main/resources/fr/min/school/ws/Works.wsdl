@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:tns="http://www.min.fr/School/ws/Works" xmlns:works="http://www.min.fr/School/ws/Works/Works"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	name="Works" targetNamespace="http://www.min.fr/School/ws/Works">
+	<wsdl:types>
+		<xsd:schema targetNamespace="http://www.min.fr/School/ws/Works">
+			<xsd:import namespace="http://www.min.fr/School/ws/Works/Works"
+				schemaLocation="Works.xsd" />
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="GetWorkResultsRequest">
+		<wsdl:part name="parameters" element="works:GetWorkResults" />
+	</wsdl:message>
+	<wsdl:message name="GetWorkResultsResponse">
+		<wsdl:part name="parameters" element="works:GetWorkResultsResponse" />
+	</wsdl:message>
+	<wsdl:message name="CreateStudentWork">
+		<wsdl:part name="parameters" element="works:CreateStudentWork" />
+	</wsdl:message>
+	<wsdl:message name="CreateWork">
+        <wsdl:part name="parameters" element="works:CreateWork" />
+    </wsdl:message>
+	<wsdl:portType name="Works">
+		<wsdl:operation name="getWorkResults">
+			<wsdl:input message="tns:GetWorkResultsRequest" />
+			<wsdl:output message="tns:GetWorkResultsResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="createStudentWork">
+			<wsdl:input message="tns:CreateStudentWork" />
+		</wsdl:operation>
+		<wsdl:operation name="createWork">
+            <wsdl:input message="tns:CreateWork" />
+        </wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="WorksWS" type="tns:Works">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="getWorkResults">
+			<soap:operation soapAction="http://www.min.fr/School/ws/Works/GetWorkResults" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="createStudentWork">
+			<soap:operation soapAction="http://www.min.fr/School/ws/Works/CreateStudentWork" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+		</wsdl:operation>
+		<wsdl:operation name="createWork">
+            <soap:operation soapAction="http://www.min.fr/School/ws/Works/CreateStudentWork" />
+            <wsdl:input>
+                <soap:body use="literal" />
+            </wsdl:input>
+        </wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="Works">
+		<wsdl:port binding="tns:WorksWS" name="WorksWS">
+			<soap:address location="http://www.example.org/" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

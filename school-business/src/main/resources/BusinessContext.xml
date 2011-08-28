@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<import resource="classpath*=ModelContext.xml" />
+
+	<bean name="propertyPlaceholder"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations" value="classpath:db.properties" />
+	</bean>
+	
+	<bean id="mapper" class="org.dozer.DozerBeanMapper" />
+
+	<bean id="workBusiness" class="fr.min.school.business.impl.WorkBusinessImpl">
+		<property name="workDAO" ref="workDao" />
+		<property name="mapper" ref="mapper" />
+	</bean>
+
+	<bean id="studentWorkBusiness" class="fr.min.school.business.impl.StudentWorkBusinessImpl">
+		<property name="studentWorkDAO" ref="studentWorkDao" />
+		<property name="workDAO" ref="workDao" />
+		<property name="studentDAO" ref="studentDao" />
+		<property name="mapper" ref="mapper" />
+	</bean>
+
+	<!-- AOP configuration -->
+
+	<aop:config>
+		<aop:pointcut id="serviceOperation"
+			expression="execution(* fr.min.school.dao..*DAO*.*(..))" />
+		<aop:advisor pointcut-ref="serviceOperation" advice-ref="txAdvice" />
+	</aop:config>
+
+	<aop:config>
+		<aop:pointcut id="logPointcut" expression="execution(* fr.min.school.business..*(..))" />
+		<aop:aspect id="loggingAspect" ref="schoolLogger">
+			<aop:before method="logMethodEntry" pointcut-ref="logPointcut" />
+			<aop:after-returning method="logMethodExit"
+				returning="result" pointcut-ref="logPointcut" />
+			<aop:after-throwing method="logMethodThrow"
+				pointcut-ref="logPointcut" throwing="thrown" />
+		</aop:aspect>
+	</aop:config>
+
+	<!-- Log configuration -->
+	<bean id="schoolLogger" class="fr.min.school.log.SchoolLogger" />
+</beans>
