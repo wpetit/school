@@ -35,6 +35,10 @@
 	<bean id="studentDao" class="fr.min.school.dao.impl.StudentDAOImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	
+	<bean id="disciplineDao" class="fr.min.school.dao.impl.DisciplineDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 
 	<!-- Hibernate settings -->
 	<bean id="transactionManager"

@@ -55,14 +55,14 @@ public class SchoolYear implements Serializable {
 	 * @return the firstTermBegin
 	 */
 	public Date getFirstTermBegin() {
-		return this.firstTermBegin;
+		return firstTermBegin;
 	}
 
 	/**
 	 * @return the firstTermEnd
 	 */
 	public Date getFirstTermEnd() {
-		return this.firstTermEnd;
+		return firstTermEnd;
 	}
 
 	/**
@@ -71,35 +71,35 @@ public class SchoolYear implements Serializable {
 	@Id
 	@GeneratedValue
 	public Integer getId() {
-		return this.id;
+		return id;
 	}
 
 	/**
 	 * @return the secondTermBegin
 	 */
 	public Date getSecondTermBegin() {
-		return this.secondTermBegin;
+		return secondTermBegin;
 	}
 
 	/**
 	 * @return the secondTermEnd
 	 */
 	public Date getSecondTermEnd() {
-		return this.secondTermEnd;
+		return secondTermEnd;
 	}
 
 	/**
 	 * @return the thirdTermBegin
 	 */
 	public Date getThirdTermBegin() {
-		return this.thirdTermBegin;
+		return thirdTermBegin;
 	}
 
 	/**
 	 * @return the thirdTermEnd
 	 */
 	public Date getThirdTermEnd() {
-		return this.thirdTermEnd;
+		return thirdTermEnd;
 	}
 
 	/**
@@ -165,11 +165,10 @@ public class SchoolYear implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "SchoolYear [firstTermBegin=" + this.firstTermBegin
-				+ ", firstTermEnd=" + this.firstTermEnd + ", id=" + this.id
-				+ ", secondTermBegin=" + this.secondTermBegin
-				+ ", secondTermEnd=" + this.secondTermEnd + ", thirdTermBegin="
-				+ this.thirdTermBegin + ", thirdTermEnd=" + this.thirdTermEnd
-				+ "]";
+		return "SchoolYear [firstTermBegin=" + firstTermBegin
+				+ ", firstTermEnd=" + firstTermEnd + ", id=" + id
+				+ ", secondTermBegin=" + secondTermBegin + ", secondTermEnd="
+				+ secondTermEnd + ", thirdTermBegin=" + thirdTermBegin
+				+ ", thirdTermEnd=" + thirdTermEnd + "]";
 	}
 }

@@ -48,14 +48,14 @@ public class School implements Serializable {
 	 * Constructor of a school.
 	 */
 	public School() {
-		this.classes = new ArrayList<StudentClass>();
+		classes = new ArrayList<StudentClass>();
 	}
 
 	/**
 	 * @return the address
 	 */
 	public String getAddress() {
-		return this.address;
+		return address;
 	}
 
 	/**
@@ -63,7 +63,7 @@ public class School implements Serializable {
 	 */
 	@OneToMany(fetch = FetchType.EAGER)
 	public List<StudentClass> getClasses() {
-		return this.classes;
+		return classes;
 	}
 
 	/**
@@ -72,14 +72,14 @@ public class School implements Serializable {
 	@Id
 	@GeneratedValue
 	public Integer getId() {
-		return this.id;
+		return id;
 	}
 
 	/**
 	 * @return the name
 	 */
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	/**
@@ -116,15 +116,15 @@ public class School implements Serializable {
 
 	@Override
 	public String toString() {
-		return "School [address=" + this.address + ", classes=" + this.classes
-				+ ", id=" + this.id + ", name=" + this.name + "]";
+		return "School [address=" + address + ", classes=" + classes + ", id="
+				+ id + ", name=" + name + "]";
 	}
 
 	/**
 	 * @param text
 	 *            the text to set
 	 */
-	public void setText(String text) {
+	public void setText(final String text) {
 		this.text = text;
 	}
 
@@ -132,7 +132,7 @@ public class School implements Serializable {
 	 * @return the text
 	 */
 	public String getText() {
-		return this.text;
+		return text;
 	}
 
 }

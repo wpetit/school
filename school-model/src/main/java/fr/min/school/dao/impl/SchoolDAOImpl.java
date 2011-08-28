@@ -20,7 +20,7 @@ public class SchoolDAOImpl extends HibernateDaoSupport implements SchoolDAO {
 
 	@Override
 	public void createSchool(final School school) {
-		this.getSessionFactory().getCurrentSession().save(school);
+		getSessionFactory().getCurrentSession().save(school);
 	}
 
 	/**
@@ -31,8 +31,8 @@ public class SchoolDAOImpl extends HibernateDaoSupport implements SchoolDAO {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<School> findAll() throws TechnicalException {
-		final List<School> schools = this.getSessionFactory()
-				.getCurrentSession().createQuery("from School").list();
+		final List<School> schools = getSessionFactory().getCurrentSession()
+				.createQuery("from School").list();
 		if (schools == null) {
 			throw new TechnicalException("No school found");
 		}
@@ -47,8 +47,8 @@ public class SchoolDAOImpl extends HibernateDaoSupport implements SchoolDAO {
 	@Override
 	public List<StudentClass> findClassesBySchoolId(final int id)
 			throws TechnicalException {
-		final School school = (School) this.getSessionFactory()
-				.getCurrentSession().get(School.class, id);
+		final School school = (School) getSessionFactory().getCurrentSession()
+				.get(School.class, id);
 		if (school == null) {
 			throw new TechnicalException("No school found for id : " + id);
 		}
@@ -63,8 +63,8 @@ public class SchoolDAOImpl extends HibernateDaoSupport implements SchoolDAO {
 	@Override
 	public List<StudentClass> findClassesBySchoolName(final String schoolName)
 			throws TechnicalException {
-		final School school = (School) this.getSessionFactory()
-				.getCurrentSession().get(School.class, schoolName);
+		final School school = (School) getSessionFactory().getCurrentSession()
+				.get(School.class, schoolName);
 		if (school == null) {
 			throw new TechnicalException("No school found for name : "
 					+ schoolName);
@@ -79,8 +79,8 @@ public class SchoolDAOImpl extends HibernateDaoSupport implements SchoolDAO {
 	 */
 	@Override
 	public School findSchoolById(final int id) throws TechnicalException {
-		final School school = (School) this.getSessionFactory()
-				.getCurrentSession().get(School.class, id);
+		final School school = (School) getSessionFactory().getCurrentSession()
+				.get(School.class, id);
 		if (school == null) {
 			throw new TechnicalException("No school found for id : " + id);
 		}
@@ -95,8 +95,8 @@ public class SchoolDAOImpl extends HibernateDaoSupport implements SchoolDAO {
 	@Override
 	public School findSchoolByName(final String schoolName)
 			throws TechnicalException {
-		final School school = (School) this.getSessionFactory()
-				.getCurrentSession().get(School.class, schoolName);
+		final School school = (School) getSessionFactory().getCurrentSession()
+				.get(School.class, schoolName);
 		if (school == null) {
 			throw new TechnicalException("No school found for name : "
 					+ schoolName);

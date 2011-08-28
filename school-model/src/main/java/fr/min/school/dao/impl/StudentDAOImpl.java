@@ -28,8 +28,8 @@ public class StudentDAOImpl extends HibernateDaoSupport implements StudentDAO {
 	 */
 	@Override
 	public Student findStudentById(final int id) {
-		return (Student) this.getSessionFactory().getCurrentSession()
-				.get(Student.class, id);
+		return (Student) getSessionFactory().getCurrentSession().get(
+				Student.class, id);
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class StudentDAOImpl extends HibernateDaoSupport implements StudentDAO {
 	 */
 	@Override
 	public Student createStudent(final Student student) {
-		this.getSessionFactory().getCurrentSession().save(student);
+		getSessionFactory().getCurrentSession().save(student);
 		return student;
 	}
 
@@ -51,9 +51,9 @@ public class StudentDAOImpl extends HibernateDaoSupport implements StudentDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Student> findStudentsByName(final String name) {
-		Criteria criteria = this.getSessionFactory().getCurrentSession()
+		final Criteria criteria = getSessionFactory().getCurrentSession()
 				.createCriteria(Student.class);
-		Criterion nameCriterion = Restrictions.eq("name", name);
+		final Criterion nameCriterion = Restrictions.eq("name", name);
 		criteria.add(nameCriterion);
 		return criteria.list();
 	}
@@ -68,10 +68,11 @@ public class StudentDAOImpl extends HibernateDaoSupport implements StudentDAO {
 	@Override
 	public List<Student> findStudentsByFirstnameAndName(final String firstname,
 			final String name) {
-		Criteria criteria = this.getSessionFactory().getCurrentSession()
+		final Criteria criteria = getSessionFactory().getCurrentSession()
 				.createCriteria(Student.class);
-		Criterion firstnameCriterion = Restrictions.eq("firstame", firstname);
-		Criterion nameCriterion = Restrictions.eq("name", name);
+		final Criterion firstnameCriterion = Restrictions.eq("firstame",
+				firstname);
+		final Criterion nameCriterion = Restrictions.eq("name", name);
 		criteria.add(firstnameCriterion);
 		criteria.add(nameCriterion);
 		return criteria.list();

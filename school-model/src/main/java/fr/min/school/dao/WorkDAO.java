@@ -6,7 +6,7 @@ package fr.min.school.dao;
 import fr.min.school.model.Work;
 
 /**
- * This class mange works.
+ * This class manage works.
  * 
  * @author Wilfried Petit
  * 

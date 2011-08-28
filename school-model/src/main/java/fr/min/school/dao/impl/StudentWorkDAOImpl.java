@@ -30,10 +30,10 @@ public class StudentWorkDAOImpl extends HibernateDaoSupport implements
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<StudentWork> findStudentWorks(int workId) {
-		Criteria criteria = this.getSessionFactory().getCurrentSession()
+	public List<StudentWork> findStudentWorks(final int workId) {
+		final Criteria criteria = getSessionFactory().getCurrentSession()
 				.createCriteria(StudentWork.class);
-		Criterion workIdCriterion = Restrictions.eq("work.id", workId);
+		final Criterion workIdCriterion = Restrictions.eq("work.id", workId);
 		criteria.add(workIdCriterion);
 		return criteria.list();
 	}
@@ -44,12 +44,12 @@ public class StudentWorkDAOImpl extends HibernateDaoSupport implements
 	 * @see fr.min.school.dao.StudentWorkDAO#getStudentWorksAverage(int)
 	 */
 	@Override
-	public float getStudentWorksAverage(int workId) {
-		Criteria criteria = this.getSessionFactory().getCurrentSession()
+	public float getStudentWorksAverage(final int workId) {
+		final Criteria criteria = getSessionFactory().getCurrentSession()
 				.createCriteria(StudentWork.class);
-		Criterion workIdCriterion = Restrictions.eq("work.id", workId);
+		final Criterion workIdCriterion = Restrictions.eq("work.id", workId);
 		criteria.add(workIdCriterion);
-		Criterion presentCriterion = Restrictions.eq("absent", false);
+		final Criterion presentCriterion = Restrictions.eq("absent", false);
 		criteria.add(presentCriterion);
 		criteria.setProjection(Projections.avg("mark"));
 		return (Float) criteria.uniqueResult();
@@ -61,7 +61,7 @@ public class StudentWorkDAOImpl extends HibernateDaoSupport implements
 	 * @see fr.min.school.dao.StudentWorkDAO#createStudentWork(fr.min.school.model.StudentWork)
 	 */
 	@Override
-	public void createStudentWork(StudentWork studentWork) {
-		this.getSessionFactory().getCurrentSession().save(studentWork);
+	public void createStudentWork(final StudentWork studentWork) {
+		getSessionFactory().getCurrentSession().save(studentWork);
 	}
 }

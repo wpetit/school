@@ -43,7 +43,7 @@ public class Student implements Serializable {
 	 * @return the firstname
 	 */
 	public String getFirstname() {
-		return this.firstname;
+		return firstname;
 	}
 
 	/**
@@ -52,14 +52,14 @@ public class Student implements Serializable {
 	@Id
 	@GeneratedValue
 	public Integer getId() {
-		return this.id;
+		return id;
 	}
 
 	/**
 	 * @return the name
 	 */
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class Student implements Serializable {
 	 * @return the birthday
 	 */
 	public Date getBirthday() {
-		return this.birthday;
+		return birthday;
 	}
 
 	/**
@@ -108,8 +108,7 @@ public class Student implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "Student [birthday=" + this.birthday + ", firstname="
-				+ this.firstname + ", id=" + this.id + ", name=" + this.name
-				+ "]";
+		return "Student [birthday=" + birthday + ", firstname=" + firstname
+				+ ", id=" + id + ", name=" + name + "]";
 	}
 }

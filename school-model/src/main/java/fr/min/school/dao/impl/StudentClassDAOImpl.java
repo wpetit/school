@@ -5,7 +5,9 @@ package fr.min.school.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import fr.min.school.dao.SchoolDAO;
@@ -41,7 +43,7 @@ public class StudentClassDAOImpl extends HibernateDaoSupport implements
 	@Override
 	public void addStudentToStudentClass(final StudentClass studentClass,
 			final Student student) {
-		this.getSessionFactory().getCurrentSession().saveOrUpdate(studentClass);
+		getSessionFactory().getCurrentSession().saveOrUpdate(studentClass);
 	}
 
 	/**
@@ -53,7 +55,7 @@ public class StudentClassDAOImpl extends HibernateDaoSupport implements
 	@Override
 	public void createStudentClass(final School school,
 			final StudentClass studentClass) {
-		this.getSessionFactory().getCurrentSession().saveOrUpdate(school);
+		getSessionFactory().getCurrentSession().saveOrUpdate(school);
 	}
 
 	/**
@@ -64,7 +66,7 @@ public class StudentClassDAOImpl extends HibernateDaoSupport implements
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<StudentClass> findAll() {
-		final Query query = this.getSessionFactory().getCurrentSession()
+		final Query query = getSessionFactory().getCurrentSession()
 				.createQuery("from StudentClass");
 		return query.list();
 	}
@@ -82,15 +84,17 @@ public class StudentClassDAOImpl extends HibernateDaoSupport implements
 	 */
 	@Override
 	public StudentClass findStudentClassByName(final String name) {
-		// TODO Auto-generated method stub
-		return null;
+		final Criteria criteria = getSessionFactory().getCurrentSession()
+				.createCriteria(StudentClass.class);
+		criteria.add(Restrictions.eq("name", name));
+		return (StudentClass) criteria.list();
 	}
 
 	/**
 	 * @return the schoolDAO
 	 */
 	public SchoolDAO getSchoolDAO() {
-		return this.schoolDAO;
+		return schoolDAO;
 	}
 
 	/**
@@ -113,7 +117,7 @@ public class StudentClassDAOImpl extends HibernateDaoSupport implements
 	 * @return the studentDAO
 	 */
 	public StudentDAO getStudentDAO() {
-		return this.studentDAO;
+		return studentDAO;
 	}
 
 }

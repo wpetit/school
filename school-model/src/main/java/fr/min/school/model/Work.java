@@ -45,14 +45,14 @@ public class Work implements Serializable {
 	@Id
 	@GeneratedValue
 	public Integer getId() {
-		return this.id;
+		return id;
 	}
 
 	/**
 	 * @return the name
 	 */
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class Work implements Serializable {
 	 * @return the date
 	 */
 	public Date getDate() {
-		return this.date;
+		return date;
 	}
 
 	/**
@@ -90,14 +90,14 @@ public class Work implements Serializable {
 	 * @return the discipline
 	 */
 	public Discipline getDiscipline() {
-		return this.discipline;
+		return discipline;
 	}
 
 	/**
 	 * @param discipline
 	 *            the discipline to set
 	 */
-	public void setDiscipline(Discipline discipline) {
+	public void setDiscipline(final Discipline discipline) {
 		this.discipline = discipline;
 	}
 
@@ -108,7 +108,7 @@ public class Work implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "Work [date=" + this.date + ", id=" + this.id + ", name="
-				+ this.name + ", discipline=" + this.discipline + "]";
+		return "Work [date=" + date + ", id=" + id + ", name=" + name
+				+ ", discipline=" + discipline + "]";
 	}
 }

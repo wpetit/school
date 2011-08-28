@@ -56,7 +56,7 @@ public class StudentWork implements Serializable {
 	 * @return the work
 	 */
 	public Work getWork() {
-		return this.work;
+		return work;
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class StudentWork implements Serializable {
 	 * @return the student
 	 */
 	public Student getStudent() {
-		return this.student;
+		return student;
 	}
 
 	/**
@@ -86,7 +86,7 @@ public class StudentWork implements Serializable {
 	 * @return the mark
 	 */
 	public float getMark() {
-		return this.mark;
+		return mark;
 	}
 
 	/**
@@ -101,7 +101,7 @@ public class StudentWork implements Serializable {
 	 * @return the absent
 	 */
 	public boolean isAbsent() {
-		return this.absent;
+		return absent;
 	}
 
 	/**
@@ -124,14 +124,14 @@ public class StudentWork implements Serializable {
 	 * @return the id
 	 */
 	public int getId() {
-		return this.id;
+		return id;
 	}
 
 	/**
 	 * @param comment
 	 *            the comment to set
 	 */
-	public void setComment(String comment) {
+	public void setComment(final String comment) {
 		this.comment = comment;
 	}
 
@@ -139,7 +139,7 @@ public class StudentWork implements Serializable {
 	 * @return the comment
 	 */
 	public String getComment() {
-		return this.comment;
+		return comment;
 	}
 
 	/**
@@ -149,8 +149,8 @@ public class StudentWork implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "StudentWork [id=" + this.id + ", work=" + this.work
-				+ ", student=" + this.student + ", mark=" + this.mark
-				+ ", absent=" + this.absent + ", comment=" + this.comment + "]";
+		return "StudentWork [id=" + id + ", work=" + work + ", student="
+				+ student + ", mark=" + mark + ", absent=" + absent
+				+ ", comment=" + comment + "]";
 	}
 }

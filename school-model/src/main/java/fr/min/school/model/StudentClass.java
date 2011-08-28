@@ -43,7 +43,7 @@ public class StudentClass implements Serializable {
 	@Id
 	@GeneratedValue
 	public Integer getId() {
-		return this.id;
+		return id;
 	}
 
 	/**
@@ -51,7 +51,7 @@ public class StudentClass implements Serializable {
 	 */
 	@ManyToOne
 	public SchoolYear getSchoolYear() {
-		return this.schoolYear;
+		return schoolYear;
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class StudentClass implements Serializable {
 	 */
 	@OneToMany
 	public List<Student> getStudents() {
-		return this.students;
+		return students;
 	}
 
 	/**
@@ -93,8 +93,8 @@ public class StudentClass implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "StudentClass [id=" + this.id + ", schoolYear="
-				+ this.schoolYear + ", students=" + this.students + "]";
+		return "StudentClass [id=" + id + ", schoolYear=" + schoolYear
+				+ ", students=" + students + "]";
 	}
 
 }

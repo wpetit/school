@@ -20,9 +20,9 @@ public class WorkDAOImpl extends HibernateDaoSupport implements WorkDAO {
 	 * @see fr.min.school.dao.WorkDAO#findWorkById()
 	 */
 	@Override
-	public Work findWorkById(int id) {
-		return (Work) this.getSessionFactory().getCurrentSession()
-				.get(Work.class, id);
+	public Work findWorkById(final int id) {
+		return (Work) getSessionFactory().getCurrentSession().get(Work.class,
+				id);
 	}
 
 	/**
@@ -31,7 +31,7 @@ public class WorkDAOImpl extends HibernateDaoSupport implements WorkDAO {
 	 * @see fr.min.school.dao.WorkDAO#createWork(fr.min.school.model.Work)
 	 */
 	@Override
-	public void createWork(Work work) {
-		this.getSessionFactory().getCurrentSession().save(work);
+	public void createWork(final Work work) {
+		getSessionFactory().getCurrentSession().save(work);
 	}
 }

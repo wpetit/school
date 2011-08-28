@@ -37,7 +37,7 @@ public class Discipline implements Serializable {
 	private String name;
 
 	/**
-	 * The ration of the discipline.
+	 * The ratio of the discipline.
 	 */
 	private int ratio;
 
@@ -45,7 +45,7 @@ public class Discipline implements Serializable {
 	 * @return the id
 	 */
 	public int getId() {
-		return this.id;
+		return id;
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class Discipline implements Serializable {
 	 * @return the name
 	 */
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class Discipline implements Serializable {
 	 * @return the ratio
 	 */
 	public int getRatio() {
-		return this.ratio;
+		return ratio;
 	}
 
 	/**
@@ -93,7 +93,7 @@ public class Discipline implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return "Discipline [id=" + this.id + ", name=" + this.name + ", ratio="
-				+ this.ratio + "]";
+		return "Discipline [id=" + id + ", name=" + name + ", ratio=" + ratio
+				+ "]";
 	}
 }
