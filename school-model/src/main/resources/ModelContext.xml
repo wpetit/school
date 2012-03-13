@@ -9,36 +9,21 @@
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 
+	<bean id="workDao" class="fr.min.school.dao.impl.WorkDAOImpl" />
+	<bean id="studentWorkDao" class="fr.min.school.dao.impl.StudentWorkDAOImpl" />
+	<bean id="schoolDao" class="fr.min.school.dao.impl.SchoolDAOImpl" />
+	<bean id="studentClassDao" class="fr.min.school.dao.impl.StudentClassDAOImpl" />
+	<bean id="studentDao" class="fr.min.school.dao.impl.StudentDAOImpl" />
+	<bean id="disciplineDao" class="fr.min.school.dao.impl.DisciplineDAOImpl" />
+
+	<!-- Persistence settings -->
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+	
 	<bean name="propertyPlaceholder"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations" value="classpath:db.properties" />
 	</bean>
 
-	<bean id="workDao" class="fr.min.school.dao.impl.WorkDAOImpl">
-		<property name="entityManagerFactory" ref="entityManagerFactory" />
-	</bean>
-
-	<bean id="studentWorkDao" class="fr.min.school.dao.impl.StudentWorkDAOImpl">
-		<property name="entityManagerFactory" ref="entityManagerFactory" />
-	</bean>
-
-	<bean id="schoolDao" class="fr.min.school.dao.impl.SchoolDAOImpl">
-		<property name="entityManagerFactory" ref="entityManagerFactory" />
-	</bean>
-
-	<bean id="studentClassDao" class="fr.min.school.dao.impl.StudentClassDAOImpl">
-		<property name="entityManagerFactory" ref="entityManagerFactory" />
-	</bean>
-
-	<bean id="studentDao" class="fr.min.school.dao.impl.StudentDAOImpl">
-		<property name="entityManagerFactory" ref="entityManagerFactory" />
-	</bean>
-
-	<bean id="disciplineDao" class="fr.min.school.dao.impl.DisciplineDAOImpl">
-		<property name="entityManagerFactory" ref="entityManagerFactory" />
-	</bean>
-
-	<!-- Hibernate settings -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
