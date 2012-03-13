@@ -8,12 +8,12 @@ import java.util.List;
 import fr.min.school.model.Discipline;
 
 /**
- * DAO for Discipline.
+ * This interface defines a discipline DAO.
  * 
  * @author Wilfried Petit
  * 
  */
-public interface DisciplineDAO {
+public interface DisciplineDAO extends DAO {
 
 	/**
 	 * Returns all disciplines.

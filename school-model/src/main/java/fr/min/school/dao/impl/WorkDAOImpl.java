@@ -3,7 +3,7 @@
  */
 package fr.min.school.dao.impl;
 
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.orm.jpa.support.JpaDaoSupport;
 
 import fr.min.school.dao.WorkDAO;
 import fr.min.school.model.Work;
@@ -12,7 +12,7 @@ import fr.min.school.model.Work;
  * @author Wilfried Petit
  * 
  */
-public class WorkDAOImpl extends HibernateDaoSupport implements WorkDAO {
+public class WorkDAOImpl extends JpaDaoSupport implements WorkDAO {
 
 	/**
 	 * {@inheritDoc}
@@ -21,8 +21,7 @@ public class WorkDAOImpl extends HibernateDaoSupport implements WorkDAO {
 	 */
 	@Override
 	public Work findWorkById(final int id) {
-		return (Work) getSessionFactory().getCurrentSession().get(Work.class,
-				id);
+		return getJpaTemplate().getEntityManager().find(Work.class, id);
 	}
 
 	/**
@@ -32,6 +31,6 @@ public class WorkDAOImpl extends HibernateDaoSupport implements WorkDAO {
 	 */
 	@Override
 	public void createWork(final Work work) {
-		getSessionFactory().getCurrentSession().save(work);
+		getJpaTemplate().getEntityManager().persist(work);
 	}
 }

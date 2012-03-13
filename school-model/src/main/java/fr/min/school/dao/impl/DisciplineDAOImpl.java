@@ -5,8 +5,7 @@ package fr.min.school.dao.impl;
 
 import java.util.List;
 
-import org.hibernate.Query;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.orm.jpa.support.JpaDaoSupport;
 
 import fr.min.school.dao.DisciplineDAO;
 import fr.min.school.model.Discipline;
@@ -15,8 +14,7 @@ import fr.min.school.model.Discipline;
  * @author Wilfried Petit
  * 
  */
-public class DisciplineDAOImpl extends HibernateDaoSupport implements
-		DisciplineDAO {
+public class DisciplineDAOImpl extends JpaDaoSupport implements DisciplineDAO {
 
 	/**
 	 * @see fr.min.school.dao.DisciplineDAO#getAllDisciplines()
@@ -24,9 +22,7 @@ public class DisciplineDAOImpl extends HibernateDaoSupport implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Discipline> getAllDisciplines() {
-		final Query query = getSessionFactory().getCurrentSession()
-				.createQuery("from Discipline");
-		return query.list();
+		return getJpaTemplate().find("select d from Discipline d");
 	}
 
 	/**
@@ -34,7 +30,7 @@ public class DisciplineDAOImpl extends HibernateDaoSupport implements
 	 */
 	@Override
 	public void createDiscipline(final Discipline discipline) {
-		getSessionFactory().getCurrentSession().saveOrUpdate(discipline);
+		getJpaTemplate().persist(discipline);
 	}
 
 	/**
@@ -42,11 +38,9 @@ public class DisciplineDAOImpl extends HibernateDaoSupport implements
 	 */
 	@Override
 	public float getDisciplineRatio(final int id) {
-		final String ratioQuery = "select ratio from Discipline d where d.id=:id";
-		final Query query = getSessionFactory().getCurrentSession()
-				.createQuery(ratioQuery);
-		query.setInteger("id", id);
-		return (Float) query.uniqueResult();
+		final Discipline discipline = getJpaTemplate().find(Discipline.class,
+				id);
+		return discipline.getRatio();
 	}
 
 }

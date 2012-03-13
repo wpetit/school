@@ -3,8 +3,6 @@
  */
 package fr.min.school.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +15,7 @@ import javax.persistence.Id;
  * 
  */
 @Entity
-public class StudentWork implements Serializable {
+public class StudentWork implements Model {
 	/**
 	 * Serial ID.
 	 */
@@ -60,6 +58,8 @@ public class StudentWork implements Serializable {
 	}
 
 	/**
+	 * Set the work the student has done.
+	 * 
 	 * @param work
 	 *            the work to set
 	 */
@@ -68,6 +68,8 @@ public class StudentWork implements Serializable {
 	}
 
 	/**
+	 * Return the student that has done the work.
+	 * 
 	 * @return the student
 	 */
 	public Student getStudent() {
@@ -75,6 +77,8 @@ public class StudentWork implements Serializable {
 	}
 
 	/**
+	 * Set the student that has done the work.
+	 * 
 	 * @param student
 	 *            the student to set
 	 */
@@ -83,6 +87,8 @@ public class StudentWork implements Serializable {
 	}
 
 	/**
+	 * Return the mark got by the student for the work.
+	 * 
 	 * @return the mark
 	 */
 	public float getMark() {
@@ -90,6 +96,8 @@ public class StudentWork implements Serializable {
 	}
 
 	/**
+	 * Set the mark got by the student for the work.
+	 * 
 	 * @param mark
 	 *            the mark to set
 	 */
@@ -98,6 +106,8 @@ public class StudentWork implements Serializable {
 	}
 
 	/**
+	 * Return <true> if the student was absent for the work.
+	 * 
 	 * @return the absent
 	 */
 	public boolean isAbsent() {
@@ -105,6 +115,8 @@ public class StudentWork implements Serializable {
 	}
 
 	/**
+	 * Set the presence of the student for the work.
+	 * 
 	 * @param absent
 	 *            the absent to set
 	 */
@@ -113,6 +125,8 @@ public class StudentWork implements Serializable {
 	}
 
 	/**
+	 * Set the student work id.
+	 * 
 	 * @param id
 	 *            the id to set
 	 */
@@ -121,6 +135,8 @@ public class StudentWork implements Serializable {
 	}
 
 	/**
+	 * Return the student work id.
+	 * 
 	 * @return the id
 	 */
 	public int getId() {
@@ -128,6 +144,8 @@ public class StudentWork implements Serializable {
 	}
 
 	/**
+	 * Set the comment the teacher gave to the student work.
+	 * 
 	 * @param comment
 	 *            the comment to set
 	 */
@@ -136,6 +154,8 @@ public class StudentWork implements Serializable {
 	}
 
 	/**
+	 * Return the comment the teacher gave to the student work.
+	 * 
 	 * @return the comment
 	 */
 	public String getComment() {

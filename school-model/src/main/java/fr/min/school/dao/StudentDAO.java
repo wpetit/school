@@ -8,7 +8,7 @@ import java.util.List;
 import fr.min.school.model.Student;
 
 /**
- * Dao for student.
+ * This interface defines a student DAO.
  * 
  * @author Wilfried Petit
  * 
@@ -28,9 +28,8 @@ public interface StudentDAO {
 	 * 
 	 * @param student
 	 *            the student that contains the information about the student.
-	 * @return the student created.
 	 */
-	Student createStudent(Student student);
+	void createStudent(Student student);
 
 	/**
 	 * Find the list of the students that have the name given.

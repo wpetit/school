@@ -3,7 +3,6 @@
  */
 package fr.min.school.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -17,7 +16,7 @@ import javax.persistence.Id;
  * 
  */
 @Entity
-public class SchoolYear implements Serializable {
+public class SchoolYear implements Model {
 	/**
 	 * Serial ID.
 	 */
@@ -52,6 +51,8 @@ public class SchoolYear implements Serializable {
 	private Date thirdTermEnd;
 
 	/**
+	 * Return the first term begin.
+	 * 
 	 * @return the firstTermBegin
 	 */
 	public Date getFirstTermBegin() {
@@ -59,6 +60,8 @@ public class SchoolYear implements Serializable {
 	}
 
 	/**
+	 * Return the first term end.
+	 * 
 	 * @return the firstTermEnd
 	 */
 	public Date getFirstTermEnd() {
@@ -66,6 +69,8 @@ public class SchoolYear implements Serializable {
 	}
 
 	/**
+	 * Return the school year id.
+	 * 
 	 * @return the id
 	 */
 	@Id
@@ -75,6 +80,8 @@ public class SchoolYear implements Serializable {
 	}
 
 	/**
+	 * Return the second term begin.
+	 * 
 	 * @return the secondTermBegin
 	 */
 	public Date getSecondTermBegin() {
@@ -82,6 +89,8 @@ public class SchoolYear implements Serializable {
 	}
 
 	/**
+	 * Return the second term end.
+	 * 
 	 * @return the secondTermEnd
 	 */
 	public Date getSecondTermEnd() {
@@ -89,6 +98,8 @@ public class SchoolYear implements Serializable {
 	}
 
 	/**
+	 * Return the third term begin.
+	 * 
 	 * @return the thirdTermBegin
 	 */
 	public Date getThirdTermBegin() {
@@ -96,6 +107,8 @@ public class SchoolYear implements Serializable {
 	}
 
 	/**
+	 * Return the third term end.
+	 * 
 	 * @return the thirdTermEnd
 	 */
 	public Date getThirdTermEnd() {
@@ -103,6 +116,8 @@ public class SchoolYear implements Serializable {
 	}
 
 	/**
+	 * Return the first term begin.
+	 * 
 	 * @param firstTermBegin
 	 *            the firstTermBegin to set
 	 */
@@ -111,6 +126,8 @@ public class SchoolYear implements Serializable {
 	}
 
 	/**
+	 * Set the first term end.
+	 * 
 	 * @param firstTermEnd
 	 *            the firstTermEnd to set
 	 */
@@ -119,6 +136,8 @@ public class SchoolYear implements Serializable {
 	}
 
 	/**
+	 * Set the school year id.
+	 * 
 	 * @param id
 	 *            the id to set
 	 */
@@ -127,6 +146,8 @@ public class SchoolYear implements Serializable {
 	}
 
 	/**
+	 * Set the second term begin.
+	 * 
 	 * @param secondTermBegin
 	 *            the secondTermBegin to set
 	 */
@@ -135,6 +156,8 @@ public class SchoolYear implements Serializable {
 	}
 
 	/**
+	 * Set the second term end.
+	 * 
 	 * @param secondTermEnd
 	 *            the secondTermEnd to set
 	 */
@@ -143,6 +166,8 @@ public class SchoolYear implements Serializable {
 	}
 
 	/**
+	 * Set the third term begin.
+	 * 
 	 * @param thirdTermBegin
 	 *            the thirdTermBegin to set
 	 */
@@ -151,6 +176,8 @@ public class SchoolYear implements Serializable {
 	}
 
 	/**
+	 * Set the third term end.
+	 * 
 	 * @param thirdTermEnd
 	 *            the thirdTermEnd to set
 	 */

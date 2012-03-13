@@ -3,9 +3,8 @@
  */
 package fr.min.school.business.impl;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import org.dozer.Mapper;
 
 import fr.min.school.business.DisciplineBusiness;
 import fr.min.school.dao.DisciplineDAO;
@@ -13,13 +12,15 @@ import fr.min.school.model.Discipline;
 import fr.min.school.model.dto.DisciplineDTO;
 
 /**
+ * This class manage the discipline business.
+ * 
  * @author Wilfried Petit
  * 
  */
-public class DisciplineBusinessImpl implements DisciplineBusiness {
+public class DisciplineBusinessImpl extends AbstractBusiness implements
+		DisciplineBusiness {
 
 	private DisciplineDAO disciplineDAO;
-	private Mapper mapper;
 
 	/**
 	 * @param disciplineDAO
@@ -40,12 +41,15 @@ public class DisciplineBusinessImpl implements DisciplineBusiness {
 	}
 
 	/**
-	 * @see fr.min.school.business.DisciplineBusiness#getAllDiscipline()
+	 * @see fr.min.school.business.DisciplineBusiness#getAllDisciplines()
 	 */
 	@Override
-	public List<DisciplineDTO> getAllDiscipline() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<DisciplineDTO> getAllDisciplines() {
+		final List<DisciplineDTO> allDisciplineDTO = new ArrayList<DisciplineDTO>();
+		for (final Discipline discipline : disciplineDAO.getAllDisciplines()) {
+			allDisciplineDTO.add(mapper.map(discipline, DisciplineDTO.class));
+		}
+		return allDisciplineDTO;
 	}
 
 }

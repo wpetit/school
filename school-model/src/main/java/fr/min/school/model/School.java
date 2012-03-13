@@ -3,7 +3,6 @@
  */
 package fr.min.school.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +19,10 @@ import javax.persistence.OneToMany;
  * 
  */
 @Entity
-public class School implements Serializable {
+public class School implements Model {
 	/**
-     * 
-     */
+	 * Serial ID.
+	 */
 	private static final long serialVersionUID = 2485483630021031653L;
 	/**
 	 * The address of the school.
@@ -33,8 +32,6 @@ public class School implements Serializable {
 	 * The classes belongs to the school.
 	 */
 	private List<StudentClass> classes;
-
-	private String text;
 	/**
 	 * The id of the school.
 	 */
@@ -52,6 +49,8 @@ public class School implements Serializable {
 	}
 
 	/**
+	 * Return the school address.
+	 * 
 	 * @return the address
 	 */
 	public String getAddress() {
@@ -59,6 +58,8 @@ public class School implements Serializable {
 	}
 
 	/**
+	 * Return the school classes.
+	 * 
 	 * @return the classes
 	 */
 	@OneToMany(fetch = FetchType.EAGER)
@@ -67,6 +68,8 @@ public class School implements Serializable {
 	}
 
 	/**
+	 * Return the school id.
+	 * 
 	 * @return the id
 	 */
 	@Id
@@ -76,6 +79,8 @@ public class School implements Serializable {
 	}
 
 	/**
+	 * Return the school name.
+	 * 
 	 * @return the name
 	 */
 	public String getName() {
@@ -83,6 +88,8 @@ public class School implements Serializable {
 	}
 
 	/**
+	 * Set the school address.
+	 * 
 	 * @param address
 	 *            the address to set
 	 */
@@ -91,6 +98,8 @@ public class School implements Serializable {
 	}
 
 	/**
+	 * Set the school classes.
+	 * 
 	 * @param classes
 	 *            the classes to set
 	 */
@@ -99,6 +108,8 @@ public class School implements Serializable {
 	}
 
 	/**
+	 * Set the school id.
+	 * 
 	 * @param id
 	 *            the id to set
 	 */
@@ -107,6 +118,8 @@ public class School implements Serializable {
 	}
 
 	/**
+	 * Set the school name.
+	 * 
 	 * @param name
 	 *            the name to set
 	 */
@@ -118,21 +131,6 @@ public class School implements Serializable {
 	public String toString() {
 		return "School [address=" + address + ", classes=" + classes + ", id="
 				+ id + ", name=" + name + "]";
-	}
-
-	/**
-	 * @param text
-	 *            the text to set
-	 */
-	public void setText(final String text) {
-		this.text = text;
-	}
-
-	/**
-	 * @return the text
-	 */
-	public String getText() {
-		return text;
 	}
 
 }

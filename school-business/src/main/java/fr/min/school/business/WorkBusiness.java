@@ -11,7 +11,7 @@ import fr.min.school.model.dto.WorkDTO;
  * @author Wilfried Petit
  * 
  */
-public interface WorkBusiness {
+public interface WorkBusiness extends Business {
 
 	/**
 	 * Search a work by its id.

@@ -6,8 +6,6 @@ package fr.min.school.business.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.dozer.Mapper;
-
 import fr.min.school.business.StudentWorkBusiness;
 import fr.min.school.dao.StudentDAO;
 import fr.min.school.dao.StudentWorkDAO;
@@ -18,46 +16,46 @@ import fr.min.school.model.Work;
 import fr.min.school.model.dto.StudentWorkDTO;
 
 /**
+ * This class manage the student work business.
+ * 
  * @author Wilfried Petit
  * 
  */
-public class StudentWorkBusinessImpl implements StudentWorkBusiness {
+public class StudentWorkBusinessImpl extends AbstractBusiness implements
+		StudentWorkBusiness {
 
 	private StudentWorkDAO studentWorkDAO;
 	private WorkDAO workDAO;
 	private StudentDAO studentDAO;
-	private Mapper mapper;
 
 	/**
+	 * Set the studentWordDAO use by the business.
+	 * 
 	 * @param studentWorkDAO
 	 *            the studentWorkDAO to set
 	 */
-	public void setStudentWorkDAO(StudentWorkDAO studentWorkDAO) {
+	public void setStudentWorkDAO(final StudentWorkDAO studentWorkDAO) {
 		this.studentWorkDAO = studentWorkDAO;
 	}
 
 	/**
+	 * Set the workDAO use by the business.
+	 * 
 	 * @param workDAO
 	 *            the workDAO to set
 	 */
-	public void setWorkDAO(WorkDAO workDAO) {
+	public void setWorkDAO(final WorkDAO workDAO) {
 		this.workDAO = workDAO;
 	}
 
 	/**
+	 * Set the studentDAO use by the business.
+	 * 
 	 * @param studentDAO
 	 *            the studentDAO to set
 	 */
-	public void setStudentDAO(StudentDAO studentDAO) {
+	public void setStudentDAO(final StudentDAO studentDAO) {
 		this.studentDAO = studentDAO;
-	}
-
-	/**
-	 * @param mapper
-	 *            the mapper to set
-	 */
-	public void setMapper(Mapper mapper) {
-		this.mapper = mapper;
 	}
 
 	/**
@@ -66,12 +64,12 @@ public class StudentWorkBusinessImpl implements StudentWorkBusiness {
 	 * @see fr.min.school.business.StudentWorkBusiness#findStudentWorks(int)
 	 */
 	@Override
-	public List<StudentWorkDTO> findStudentWorks(int workId) {
-		List<StudentWorkDTO> studentWorkDTOList = new ArrayList<StudentWorkDTO>();
-		for (StudentWork studentWork : this.studentWorkDAO
+	public List<StudentWorkDTO> findStudentWorks(final int workId) {
+		final List<StudentWorkDTO> studentWorkDTOList = new ArrayList<StudentWorkDTO>();
+		for (final StudentWork studentWork : studentWorkDAO
 				.findStudentWorks(workId)) {
-			studentWorkDTOList.add(this.mapper.map(studentWork,
-					StudentWorkDTO.class));
+			studentWorkDTOList.add(mapper
+					.map(studentWork, StudentWorkDTO.class));
 		}
 		return studentWorkDTOList;
 	}
@@ -82,8 +80,8 @@ public class StudentWorkBusinessImpl implements StudentWorkBusiness {
 	 * @see fr.min.school.business.StudentWorkBusiness#getStudentWorksAverage(int)
 	 */
 	@Override
-	public float getStudentWorksAverage(int workId) {
-		return this.studentWorkDAO.getStudentWorksAverage(workId);
+	public float getStudentWorksAverage(final int workId) {
+		return studentWorkDAO.getStudentWorksAverage(workId);
 	}
 
 	/**
@@ -92,14 +90,15 @@ public class StudentWorkBusinessImpl implements StudentWorkBusiness {
 	 * @see fr.min.school.business.StudentWorkBusiness#createStudentWork(fr.min.school.dto.StudentWorkDTO)
 	 */
 	@Override
-	public void createStudentWork(StudentWorkDTO studentWorkDTO) {
-		StudentWork studentWork = this.mapper.map(studentWorkDTO,
+	public void createStudentWork(final StudentWorkDTO studentWorkDTO) {
+		final StudentWork studentWork = mapper.map(studentWorkDTO,
 				StudentWork.class);
-		Work work = this.workDAO.findWorkById(studentWorkDTO.getWork().getId());
+		final Work work = workDAO
+				.findWorkById(studentWorkDTO.getWork().getId());
 		studentWork.setWork(work);
-		Student student = this.studentDAO.findStudentById(studentWorkDTO
+		final Student student = studentDAO.findStudentById(studentWorkDTO
 				.getStudent().getId());
 		studentWork.setStudent(student);
-		this.studentWorkDAO.createStudentWork(studentWork);
+		studentWorkDAO.createStudentWork(studentWork);
 	}
 }

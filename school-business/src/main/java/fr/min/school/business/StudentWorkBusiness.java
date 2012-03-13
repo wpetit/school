@@ -11,7 +11,7 @@ import fr.min.school.model.dto.StudentWorkDTO;
  * @author Wilfried Petit
  * 
  */
-public interface StudentWorkBusiness {
+public interface StudentWorkBusiness extends Business {
 
 	/**
 	 * Find the list of the student works for the work given.

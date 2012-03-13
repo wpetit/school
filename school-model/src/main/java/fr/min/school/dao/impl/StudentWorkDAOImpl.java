@@ -5,11 +5,7 @@ package fr.min.school.dao.impl;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.orm.jpa.support.JpaDaoSupport;
 
 import fr.min.school.dao.StudentWorkDAO;
 import fr.min.school.model.StudentWork;
@@ -20,8 +16,7 @@ import fr.min.school.model.StudentWork;
  * @author Wilfried Petit
  * 
  */
-public class StudentWorkDAOImpl extends HibernateDaoSupport implements
-		StudentWorkDAO {
+public class StudentWorkDAOImpl extends JpaDaoSupport implements StudentWorkDAO {
 
 	/**
 	 * {@inheritDoc}
@@ -31,11 +26,8 @@ public class StudentWorkDAOImpl extends HibernateDaoSupport implements
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<StudentWork> findStudentWorks(final int workId) {
-		final Criteria criteria = getSessionFactory().getCurrentSession()
-				.createCriteria(StudentWork.class);
-		final Criterion workIdCriterion = Restrictions.eq("work.id", workId);
-		criteria.add(workIdCriterion);
-		return criteria.list();
+		return getJpaTemplate().find(
+				"select s from StudentWork where s.work.id=?1", workId);
 	}
 
 	/**
@@ -45,14 +37,9 @@ public class StudentWorkDAOImpl extends HibernateDaoSupport implements
 	 */
 	@Override
 	public float getStudentWorksAverage(final int workId) {
-		final Criteria criteria = getSessionFactory().getCurrentSession()
-				.createCriteria(StudentWork.class);
-		final Criterion workIdCriterion = Restrictions.eq("work.id", workId);
-		criteria.add(workIdCriterion);
-		final Criterion presentCriterion = Restrictions.eq("absent", false);
-		criteria.add(presentCriterion);
-		criteria.setProjection(Projections.avg("mark"));
-		return (Float) criteria.uniqueResult();
+		return (Float) getJpaTemplate().find(
+				"select avg(s.mark) from StudentWork where s.work.id=?1",
+				workId).get(0);
 	}
 
 	/**
@@ -62,6 +49,6 @@ public class StudentWorkDAOImpl extends HibernateDaoSupport implements
 	 */
 	@Override
 	public void createStudentWork(final StudentWork studentWork) {
-		getSessionFactory().getCurrentSession().save(studentWork);
+		getJpaTemplate().persist(studentWork);
 	}
 }

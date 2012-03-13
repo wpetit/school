@@ -5,10 +5,7 @@ package fr.min.school.dao.impl;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.Restrictions;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.orm.jpa.support.JpaDaoSupport;
 
 import fr.min.school.dao.StudentDAO;
 import fr.min.school.model.Student;
@@ -19,7 +16,7 @@ import fr.min.school.model.Student;
  * @author Wilfried Petit
  * 
  */
-public class StudentDAOImpl extends HibernateDaoSupport implements StudentDAO {
+public class StudentDAOImpl extends JpaDaoSupport implements StudentDAO {
 
 	/**
 	 * {@inheritDoc}
@@ -28,8 +25,7 @@ public class StudentDAOImpl extends HibernateDaoSupport implements StudentDAO {
 	 */
 	@Override
 	public Student findStudentById(final int id) {
-		return (Student) getSessionFactory().getCurrentSession().get(
-				Student.class, id);
+		return getJpaTemplate().find(Student.class, id);
 	}
 
 	/**
@@ -38,9 +34,8 @@ public class StudentDAOImpl extends HibernateDaoSupport implements StudentDAO {
 	 * @see fr.min.school.dao.StudentDAO#createStudent(fr.min.school.Student)
 	 */
 	@Override
-	public Student createStudent(final Student student) {
-		getSessionFactory().getCurrentSession().save(student);
-		return student;
+	public void createStudent(final Student student) {
+		getJpaTemplate().persist(student);
 	}
 
 	/**
@@ -51,11 +46,8 @@ public class StudentDAOImpl extends HibernateDaoSupport implements StudentDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Student> findStudentsByName(final String name) {
-		final Criteria criteria = getSessionFactory().getCurrentSession()
-				.createCriteria(Student.class);
-		final Criterion nameCriterion = Restrictions.eq("name", name);
-		criteria.add(nameCriterion);
-		return criteria.list();
+		return getJpaTemplate().find("select s from Student s where s.name=?1",
+				name);
 	}
 
 	/**
@@ -68,14 +60,9 @@ public class StudentDAOImpl extends HibernateDaoSupport implements StudentDAO {
 	@Override
 	public List<Student> findStudentsByFirstnameAndName(final String firstname,
 			final String name) {
-		final Criteria criteria = getSessionFactory().getCurrentSession()
-				.createCriteria(Student.class);
-		final Criterion firstnameCriterion = Restrictions.eq("firstame",
-				firstname);
-		final Criterion nameCriterion = Restrictions.eq("name", name);
-		criteria.add(firstnameCriterion);
-		criteria.add(nameCriterion);
-		return criteria.list();
+		return getJpaTemplate().find(
+				"select s from Student s where s.firsname=?1, s.name=?2",
+				firstname, name);
 	}
 
 }

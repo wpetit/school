@@ -3,7 +3,6 @@
  */
 package fr.min.school.model;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -19,7 +18,7 @@ import javax.persistence.OneToMany;
  * 
  */
 @Entity
-public class StudentClass implements Serializable {
+public class StudentClass implements Model {
 	/**
 	 * Serial ID.
 	 */
@@ -38,6 +37,8 @@ public class StudentClass implements Serializable {
 	private List<Student> students;
 
 	/**
+	 * Return the student class id.
+	 * 
 	 * @return the id
 	 */
 	@Id
@@ -47,6 +48,8 @@ public class StudentClass implements Serializable {
 	}
 
 	/**
+	 * Return the school year the student class belongs to.
+	 * 
 	 * @return the schoolYear
 	 */
 	@ManyToOne
@@ -55,6 +58,8 @@ public class StudentClass implements Serializable {
 	}
 
 	/**
+	 * Return the students that belongs to the student class.
+	 * 
 	 * @return the students
 	 */
 	@OneToMany
@@ -63,6 +68,8 @@ public class StudentClass implements Serializable {
 	}
 
 	/**
+	 * Set the student class id.
+	 * 
 	 * @param id
 	 *            the id to set
 	 */
@@ -71,6 +78,8 @@ public class StudentClass implements Serializable {
 	}
 
 	/**
+	 * Set the school year the student class belongs to.
+	 * 
 	 * @param schoolYear
 	 *            the schoolYear to set
 	 */
@@ -79,6 +88,8 @@ public class StudentClass implements Serializable {
 	}
 
 	/**
+	 * Set the students that belong to the student class.
+	 * 
 	 * @param students
 	 *            the students to set
 	 */

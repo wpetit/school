@@ -3,7 +3,6 @@
  */
 package fr.min.school.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -11,11 +10,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
+ * This class defines a work.
+ * 
  * @author Wilfried Petit
  * 
  */
 @Entity
-public class Work implements Serializable {
+public class Work implements Model {
 	/**
 	 * Serial ID.
 	 */
@@ -40,6 +41,8 @@ public class Work implements Serializable {
 	private Discipline discipline;
 
 	/**
+	 * Return the work id.
+	 * 
 	 * @return the id
 	 */
 	@Id
@@ -49,6 +52,8 @@ public class Work implements Serializable {
 	}
 
 	/**
+	 * Return the work name.
+	 * 
 	 * @return the name
 	 */
 	public String getName() {
@@ -56,6 +61,8 @@ public class Work implements Serializable {
 	}
 
 	/**
+	 * Set the work id.
+	 * 
 	 * @param id
 	 *            the id to set
 	 */
@@ -64,6 +71,8 @@ public class Work implements Serializable {
 	}
 
 	/**
+	 * Set the work name.
+	 * 
 	 * @param name
 	 *            the name to set
 	 */
@@ -72,6 +81,8 @@ public class Work implements Serializable {
 	}
 
 	/**
+	 * Return the work date.
+	 * 
 	 * @return the date
 	 */
 	public Date getDate() {
@@ -79,6 +90,8 @@ public class Work implements Serializable {
 	}
 
 	/**
+	 * Set the work date.
+	 * 
 	 * @param date
 	 *            the date to set
 	 */
@@ -87,6 +100,8 @@ public class Work implements Serializable {
 	}
 
 	/**
+	 * Return the work discipline.
+	 * 
 	 * @return the discipline
 	 */
 	public Discipline getDiscipline() {
@@ -94,6 +109,8 @@ public class Work implements Serializable {
 	}
 
 	/**
+	 * Set the work discipline.
+	 * 
 	 * @param discipline
 	 *            the discipline to set
 	 */

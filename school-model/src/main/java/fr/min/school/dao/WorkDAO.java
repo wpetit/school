@@ -6,7 +6,7 @@ package fr.min.school.dao;
 import fr.min.school.model.Work;
 
 /**
- * This class manage works.
+ * This interface defines a work DAO.
  * 
  * @author Wilfried Petit
  * 

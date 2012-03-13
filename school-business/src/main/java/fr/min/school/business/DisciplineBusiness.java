@@ -13,7 +13,7 @@ import fr.min.school.model.dto.DisciplineDTO;
  * @author Wilfried Petit
  * 
  */
-public interface DisciplineBusiness {
+public interface DisciplineBusiness extends Business {
 
 	/**
 	 * Create a new discipline.
@@ -28,6 +28,6 @@ public interface DisciplineBusiness {
 	 * 
 	 * @return disciplines found.
 	 */
-	List<DisciplineDTO> getAllDiscipline();
+	List<DisciplineDTO> getAllDisciplines();
 
 }

@@ -5,14 +5,9 @@ package fr.min.school.dao.impl;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.criterion.Restrictions;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.orm.jpa.support.JpaDaoSupport;
 
-import fr.min.school.dao.SchoolDAO;
 import fr.min.school.dao.StudentClassDAO;
-import fr.min.school.dao.StudentDAO;
 import fr.min.school.model.School;
 import fr.min.school.model.Student;
 import fr.min.school.model.StudentClass;
@@ -21,18 +16,8 @@ import fr.min.school.model.StudentClass;
  * @author Wilfried Petit
  * 
  */
-public class StudentClassDAOImpl extends HibernateDaoSupport implements
+public class StudentClassDAOImpl extends JpaDaoSupport implements
 		StudentClassDAO {
-
-	/**
-	 * The schoolDao to manage schools.
-	 */
-	private SchoolDAO schoolDAO;
-
-	/**
-	 * The studentDAO to manage students.
-	 */
-	private StudentDAO studentDAO;
 
 	/**
 	 * {@inheritDoc}
@@ -43,7 +28,8 @@ public class StudentClassDAOImpl extends HibernateDaoSupport implements
 	@Override
 	public void addStudentToStudentClass(final StudentClass studentClass,
 			final Student student) {
-		getSessionFactory().getCurrentSession().saveOrUpdate(studentClass);
+		studentClass.getStudents().add(student);
+		getJpaTemplate().persist(studentClass);
 	}
 
 	/**
@@ -55,7 +41,7 @@ public class StudentClassDAOImpl extends HibernateDaoSupport implements
 	@Override
 	public void createStudentClass(final School school,
 			final StudentClass studentClass) {
-		getSessionFactory().getCurrentSession().saveOrUpdate(school);
+		getJpaTemplate().persist(school);
 	}
 
 	/**
@@ -66,15 +52,12 @@ public class StudentClassDAOImpl extends HibernateDaoSupport implements
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<StudentClass> findAll() {
-		final Query query = getSessionFactory().getCurrentSession()
-				.createQuery("from StudentClass");
-		return query.list();
+		return getJpaTemplate().find("select s from StudentClass s");
 	}
 
 	@Override
 	public StudentClass findStudentClassById(final int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return getJpaTemplate().find(StudentClass.class, id);
 	}
 
 	/**
@@ -84,40 +67,7 @@ public class StudentClassDAOImpl extends HibernateDaoSupport implements
 	 */
 	@Override
 	public StudentClass findStudentClassByName(final String name) {
-		final Criteria criteria = getSessionFactory().getCurrentSession()
-				.createCriteria(StudentClass.class);
-		criteria.add(Restrictions.eq("name", name));
-		return (StudentClass) criteria.list();
+		return (StudentClass) getJpaTemplate().find(
+				"select s from StudentClass s where s.name=?1", name).get(0);
 	}
-
-	/**
-	 * @return the schoolDAO
-	 */
-	public SchoolDAO getSchoolDAO() {
-		return schoolDAO;
-	}
-
-	/**
-	 * @param schoolDAO
-	 *            the schoolDAO to set
-	 */
-	public void setSchoolDAO(final SchoolDAO schoolDAO) {
-		this.schoolDAO = schoolDAO;
-	}
-
-	/**
-	 * @param studentDAO
-	 *            the studentDAO to set
-	 */
-	public void setStudentDAO(final StudentDAO studentDAO) {
-		this.studentDAO = studentDAO;
-	}
-
-	/**
-	 * @return the studentDAO
-	 */
-	public StudentDAO getStudentDAO() {
-		return studentDAO;
-	}
-
 }

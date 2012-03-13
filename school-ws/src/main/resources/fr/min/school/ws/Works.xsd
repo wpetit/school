@@ -31,6 +31,13 @@
 	       </sequence>
 	   </complexType>
 	</element>
+	<element name="CreateWorkResponse">
+	   <complexType>
+	       <sequence>
+	           <element name="id" type="int"/>    
+	       </sequence>
+	   </complexType>
+	</element>
 	<complexType name="StudentWork">
 		<sequence>
 			<element name="workId" type="int" />
@@ -42,7 +49,7 @@
 	</complexType>
 	<complexType name="Work">
 	   <sequence>
-	       <element name="date" type="date"/>
+	       <element name="date" type="date" nillable="true" minOccurs="0"/>
 	       <element name="disciplineId" type="int"/>
 	       <element name="name" type="string"/>
 	   </sequence>

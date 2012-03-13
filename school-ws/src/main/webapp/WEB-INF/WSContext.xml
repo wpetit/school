@@ -6,10 +6,14 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
 
 	<jaxws:endpoint id="Works"
-		implementor="#WorksImpl" address="/Works" />
+		implementor="#WorksImpl" address="/Works" >
+		<jaxws:properties>
+<entry key="schema-validation-enabled" value="false" />
+</jaxws:properties>
+		</jaxws:endpoint>
 		
 	<bean id="WorksImpl" class="fr.min.school.ws.works.impl.WorksImpl">
-	   <property name="workBusiness" ref="workBusiness"/>
-	   <property name="studentWorkBusiness" ref="studentWorkBusiness"/>
+<!-- 	   <property name="workBusiness" ref="workBusiness"/> -->
+<!-- 	   <property name="studentWorkBusiness" ref="studentWorkBusiness"/> -->
 	</bean>
 </beans>

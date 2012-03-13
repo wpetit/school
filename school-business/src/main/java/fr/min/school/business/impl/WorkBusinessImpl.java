@@ -3,36 +3,29 @@
  */
 package fr.min.school.business.impl;
 
-import org.dozer.Mapper;
-
 import fr.min.school.business.WorkBusiness;
 import fr.min.school.dao.WorkDAO;
 import fr.min.school.model.Work;
 import fr.min.school.model.dto.WorkDTO;
 
 /**
+ * This class manage the work business.
+ * 
  * @author Wilfried Petit
  * 
  */
-public class WorkBusinessImpl implements WorkBusiness {
+public class WorkBusinessImpl extends AbstractBusiness implements WorkBusiness {
 
 	private WorkDAO workDAO;
-	private Mapper mapper;
 
 	/**
+	 * Set the workDAO use by the business.
+	 * 
 	 * @param workDAO
 	 *            the workDAO to set
 	 */
-	public void setWorkDAO(WorkDAO workDAO) {
+	public void setWorkDAO(final WorkDAO workDAO) {
 		this.workDAO = workDAO;
-	}
-
-	/**
-	 * @param mapper
-	 *            the mapper to set
-	 */
-	public void setMapper(Mapper mapper) {
-		this.mapper = mapper;
 	}
 
 	/**
@@ -41,9 +34,9 @@ public class WorkBusinessImpl implements WorkBusiness {
 	 * @see fr.min.school.business.WorkBusiness#findWorkById(int)
 	 */
 	@Override
-	public WorkDTO findWorkById(int id) {
-		Work work = this.workDAO.findWorkById(id);
-		return this.mapper.map(work, WorkDTO.class);
+	public WorkDTO findWorkById(final int id) {
+		final Work work = workDAO.findWorkById(id);
+		return mapper.map(work, WorkDTO.class);
 	}
 
 	/**
@@ -52,8 +45,8 @@ public class WorkBusinessImpl implements WorkBusiness {
 	 * @see fr.min.school.business.WorkBusiness#createWork(fr.min.school.dto.WorkDTO)
 	 */
 	@Override
-	public void createWork(WorkDTO work) {
-		this.workDAO.createWork(this.mapper.map(work, Work.class));
+	public void createWork(final WorkDTO work) {
+		workDAO.createWork(mapper.map(work, Work.class));
 	}
 
 }

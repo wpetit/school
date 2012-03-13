@@ -7,10 +7,12 @@ import fr.min.school.model.School;
 import fr.min.school.model.StudentClass;
 
 /**
+ * This interface defines a school DAO.
+ * 
  * @author Wilfried Petit
  * 
  */
-public interface SchoolDAO {
+public interface SchoolDAO extends DAO {
 
 	/**
 	 * Create a school.

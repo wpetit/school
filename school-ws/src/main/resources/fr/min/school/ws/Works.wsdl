@@ -21,6 +21,9 @@
 	<wsdl:message name="CreateWork">
         <wsdl:part name="parameters" element="works:CreateWork" />
     </wsdl:message>
+    <wsdl:message name="CreateWorkResponse">
+        <wsdl:part name="parameters" element="works:CreateWorkResponse" />
+    </wsdl:message>
 	<wsdl:portType name="Works">
 		<wsdl:operation name="getWorkResults">
 			<wsdl:input message="tns:GetWorkResultsRequest" />
@@ -31,6 +34,7 @@
 		</wsdl:operation>
 		<wsdl:operation name="createWork">
             <wsdl:input message="tns:CreateWork" />
+            <wsdl:output message="tns:CreateWorkResponse" />
         </wsdl:operation>
 	</wsdl:portType>
 	<wsdl:binding name="WorksWS" type="tns:Works">

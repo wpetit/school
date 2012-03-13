@@ -10,10 +10,12 @@ import fr.min.school.model.Student;
 import fr.min.school.model.StudentClass;
 
 /**
+ * This interface defines a student class DAO.
+ * 
  * @author Wilfried Petit
  * 
  */
-public interface StudentClassDAO {
+public interface StudentClassDAO extends DAO {
 
 	/**
 	 * Add a student to a student class.

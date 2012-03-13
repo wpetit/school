@@ -5,7 +5,7 @@ package fr.min.school.dao.impl;
 
 import java.util.List;
 
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.orm.jpa.support.JpaDaoSupport;
 
 import fr.min.school.dao.SchoolDAO;
 import fr.min.school.exception.TechnicalException;
@@ -16,11 +16,11 @@ import fr.min.school.model.StudentClass;
  * @author Wilfried Petit
  * 
  */
-public class SchoolDAOImpl extends HibernateDaoSupport implements SchoolDAO {
+public class SchoolDAOImpl extends JpaDaoSupport implements SchoolDAO {
 
 	@Override
 	public void createSchool(final School school) {
-		getSessionFactory().getCurrentSession().save(school);
+		getJpaTemplate().persist(school);
 	}
 
 	/**
@@ -31,8 +31,8 @@ public class SchoolDAOImpl extends HibernateDaoSupport implements SchoolDAO {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<School> findAll() throws TechnicalException {
-		final List<School> schools = getSessionFactory().getCurrentSession()
-				.createQuery("from School").list();
+		final List<School> schools = getJpaTemplate().find(
+				"select s from School s");
 		if (schools == null) {
 			throw new TechnicalException("No school found");
 		}
@@ -47,11 +47,7 @@ public class SchoolDAOImpl extends HibernateDaoSupport implements SchoolDAO {
 	@Override
 	public List<StudentClass> findClassesBySchoolId(final int id)
 			throws TechnicalException {
-		final School school = (School) getSessionFactory().getCurrentSession()
-				.get(School.class, id);
-		if (school == null) {
-			throw new TechnicalException("No school found for id : " + id);
-		}
+		final School school = getJpaTemplate().find(School.class, id);
 		return school.getClasses();
 	}
 
@@ -63,12 +59,8 @@ public class SchoolDAOImpl extends HibernateDaoSupport implements SchoolDAO {
 	@Override
 	public List<StudentClass> findClassesBySchoolName(final String schoolName)
 			throws TechnicalException {
-		final School school = (School) getSessionFactory().getCurrentSession()
-				.get(School.class, schoolName);
-		if (school == null) {
-			throw new TechnicalException("No school found for name : "
-					+ schoolName);
-		}
+		final School school = (School) getJpaTemplate().find(
+				"select s from School s where s.name=?1", schoolName).get(0);
 		return school.getClasses();
 	}
 
@@ -79,12 +71,7 @@ public class SchoolDAOImpl extends HibernateDaoSupport implements SchoolDAO {
 	 */
 	@Override
 	public School findSchoolById(final int id) throws TechnicalException {
-		final School school = (School) getSessionFactory().getCurrentSession()
-				.get(School.class, id);
-		if (school == null) {
-			throw new TechnicalException("No school found for id : " + id);
-		}
-		return school;
+		return getJpaTemplate().find(School.class, id);
 	}
 
 	/**
@@ -95,13 +82,8 @@ public class SchoolDAOImpl extends HibernateDaoSupport implements SchoolDAO {
 	@Override
 	public School findSchoolByName(final String schoolName)
 			throws TechnicalException {
-		final School school = (School) getSessionFactory().getCurrentSession()
-				.get(School.class, schoolName);
-		if (school == null) {
-			throw new TechnicalException("No school found for name : "
-					+ schoolName);
-		}
-		return school;
+		return (School) getJpaTemplate().find(
+				"select s from School s where s.name=?1", schoolName);
 	}
 
 }
