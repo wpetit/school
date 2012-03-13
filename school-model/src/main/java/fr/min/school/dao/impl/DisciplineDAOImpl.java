@@ -5,16 +5,16 @@ package fr.min.school.dao.impl;
 
 import java.util.List;
 
-import org.springframework.orm.jpa.support.JpaDaoSupport;
-
 import fr.min.school.dao.DisciplineDAO;
 import fr.min.school.model.Discipline;
 
 /**
+ * DAO implementation for disciplines.
+ * 
  * @author Wilfried Petit
  * 
  */
-public class DisciplineDAOImpl extends JpaDaoSupport implements DisciplineDAO {
+public class DisciplineDAOImpl extends DAOImpl implements DisciplineDAO {
 
 	/**
 	 * @see fr.min.school.dao.DisciplineDAO#getAllDisciplines()
@@ -22,7 +22,8 @@ public class DisciplineDAOImpl extends JpaDaoSupport implements DisciplineDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Discipline> getAllDisciplines() {
-		return getJpaTemplate().find("select d from Discipline d");
+		return entityManager.createQuery("select d from Discipline d")
+				.getResultList();
 	}
 
 	/**
@@ -30,7 +31,7 @@ public class DisciplineDAOImpl extends JpaDaoSupport implements DisciplineDAO {
 	 */
 	@Override
 	public void createDiscipline(final Discipline discipline) {
-		getJpaTemplate().persist(discipline);
+		entityManager.persist(discipline);
 	}
 
 	/**
@@ -38,8 +39,7 @@ public class DisciplineDAOImpl extends JpaDaoSupport implements DisciplineDAO {
 	 */
 	@Override
 	public float getDisciplineRatio(final int id) {
-		final Discipline discipline = getJpaTemplate().find(Discipline.class,
-				id);
+		final Discipline discipline = entityManager.find(Discipline.class, id);
 		return discipline.getRatio();
 	}
 

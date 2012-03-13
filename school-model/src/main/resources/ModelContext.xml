@@ -28,8 +28,6 @@
 
 	<bean id="studentClassDao" class="fr.min.school.dao.impl.StudentClassDAOImpl">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
-		<property name="schoolDAO" ref="schoolDao" />
-		<property name="studentDAO" ref="studentDao" />
 	</bean>
 
 	<bean id="studentDao" class="fr.min.school.dao.impl.StudentDAOImpl">
@@ -46,12 +44,15 @@
 	</bean>
 
 	<bean id="entityManagerFactory"
-		class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
-<!-- 		<property name="dataSource" ref="dataSource"/> -->
-		<property name="persistenceUnitName" value="SchoolPersistenceUnit"/>
-<!-- 		<property name="loadTimeWeaver"> -->
-<!-- 			<bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver" /> -->
-<!-- 		</property> -->
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="showSql" value="true" />
+				<property name="generateDdl" value="true" />
+				<property name="databasePlatform" value="org.hibernate.dialect.PostgreSQLDialect" />
+			</bean>
+		</property>
 	</bean>
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">

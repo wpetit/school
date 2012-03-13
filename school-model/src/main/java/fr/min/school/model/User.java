@@ -6,6 +6,8 @@ package fr.min.school.model;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 /**
@@ -47,6 +49,8 @@ public class User implements Model {
 	 * 
 	 * @return the id
 	 */
+	@Id
+	@GeneratedValue
 	public int getId() {
 		return id;
 	}

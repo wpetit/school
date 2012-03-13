@@ -5,19 +5,18 @@ package fr.min.school.dao.impl;
 
 import java.util.List;
 
-import org.springframework.orm.jpa.support.JpaDaoSupport;
-
 import fr.min.school.dao.StudentClassDAO;
 import fr.min.school.model.School;
 import fr.min.school.model.Student;
 import fr.min.school.model.StudentClass;
 
 /**
+ * DAO implementation for student classes.
+ * 
  * @author Wilfried Petit
  * 
  */
-public class StudentClassDAOImpl extends JpaDaoSupport implements
-		StudentClassDAO {
+public class StudentClassDAOImpl extends DAOImpl implements StudentClassDAO {
 
 	/**
 	 * {@inheritDoc}
@@ -29,7 +28,7 @@ public class StudentClassDAOImpl extends JpaDaoSupport implements
 	public void addStudentToStudentClass(final StudentClass studentClass,
 			final Student student) {
 		studentClass.getStudents().add(student);
-		getJpaTemplate().persist(studentClass);
+		entityManager.persist(studentClass);
 	}
 
 	/**
@@ -41,7 +40,7 @@ public class StudentClassDAOImpl extends JpaDaoSupport implements
 	@Override
 	public void createStudentClass(final School school,
 			final StudentClass studentClass) {
-		getJpaTemplate().persist(school);
+		entityManager.persist(school);
 	}
 
 	/**
@@ -52,12 +51,13 @@ public class StudentClassDAOImpl extends JpaDaoSupport implements
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<StudentClass> findAll() {
-		return getJpaTemplate().find("select s from StudentClass s");
+		return entityManager.createQuery("select s from StudentClass s")
+				.getResultList();
 	}
 
 	@Override
 	public StudentClass findStudentClassById(final int id) {
-		return getJpaTemplate().find(StudentClass.class, id);
+		return entityManager.find(StudentClass.class, id);
 	}
 
 	/**
@@ -67,7 +67,8 @@ public class StudentClassDAOImpl extends JpaDaoSupport implements
 	 */
 	@Override
 	public StudentClass findStudentClassByName(final String name) {
-		return (StudentClass) getJpaTemplate().find(
-				"select s from StudentClass s where s.name=?1", name).get(0);
+		return (StudentClass) entityManager
+				.createQuery("select s from StudentClass s where s.name=:name")
+				.setParameter("name", name).getSingleResult();
 	}
 }

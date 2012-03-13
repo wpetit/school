@@ -5,22 +5,22 @@ package fr.min.school.dao.impl;
 
 import java.util.List;
 
-import org.springframework.orm.jpa.support.JpaDaoSupport;
-
 import fr.min.school.dao.SchoolDAO;
 import fr.min.school.exception.TechnicalException;
 import fr.min.school.model.School;
 import fr.min.school.model.StudentClass;
 
 /**
+ * DAO implementation for schools.
+ * 
  * @author Wilfried Petit
  * 
  */
-public class SchoolDAOImpl extends JpaDaoSupport implements SchoolDAO {
+public class SchoolDAOImpl extends DAOImpl implements SchoolDAO {
 
 	@Override
 	public void createSchool(final School school) {
-		getJpaTemplate().persist(school);
+		entityManager.persist(school);
 	}
 
 	/**
@@ -31,8 +31,8 @@ public class SchoolDAOImpl extends JpaDaoSupport implements SchoolDAO {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<School> findAll() throws TechnicalException {
-		final List<School> schools = getJpaTemplate().find(
-				"select s from School s");
+		final List<School> schools = entityManager.createQuery(
+				"select s from School s").getResultList();
 		if (schools == null) {
 			throw new TechnicalException("No school found");
 		}
@@ -47,7 +47,7 @@ public class SchoolDAOImpl extends JpaDaoSupport implements SchoolDAO {
 	@Override
 	public List<StudentClass> findClassesBySchoolId(final int id)
 			throws TechnicalException {
-		final School school = getJpaTemplate().find(School.class, id);
+		final School school = entityManager.find(School.class, id);
 		return school.getClasses();
 	}
 
@@ -59,8 +59,9 @@ public class SchoolDAOImpl extends JpaDaoSupport implements SchoolDAO {
 	@Override
 	public List<StudentClass> findClassesBySchoolName(final String schoolName)
 			throws TechnicalException {
-		final School school = (School) getJpaTemplate().find(
-				"select s from School s where s.name=?1", schoolName).get(0);
+		final School school = (School) entityManager
+				.createQuery("select s from School s where s.name=:name")
+				.setParameter("name", schoolName).getSingleResult();
 		return school.getClasses();
 	}
 
@@ -71,7 +72,7 @@ public class SchoolDAOImpl extends JpaDaoSupport implements SchoolDAO {
 	 */
 	@Override
 	public School findSchoolById(final int id) throws TechnicalException {
-		return getJpaTemplate().find(School.class, id);
+		return entityManager.find(School.class, id);
 	}
 
 	/**
@@ -82,8 +83,9 @@ public class SchoolDAOImpl extends JpaDaoSupport implements SchoolDAO {
 	@Override
 	public School findSchoolByName(final String schoolName)
 			throws TechnicalException {
-		return (School) getJpaTemplate().find(
-				"select s from School s where s.name=?1", schoolName);
+		return (School) entityManager
+				.createQuery("select s from School s where s.name=:schoolName")
+				.setParameter("schoolName", schoolName).getResultList();
 	}
 
 }

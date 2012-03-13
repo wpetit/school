@@ -3,16 +3,16 @@
  */
 package fr.min.school.dao.impl;
 
-import org.springframework.orm.jpa.support.JpaDaoSupport;
-
 import fr.min.school.dao.WorkDAO;
 import fr.min.school.model.Work;
 
 /**
+ * DAO implementation for works.
+ * 
  * @author Wilfried Petit
  * 
  */
-public class WorkDAOImpl extends JpaDaoSupport implements WorkDAO {
+public class WorkDAOImpl extends DAOImpl implements WorkDAO {
 
 	/**
 	 * {@inheritDoc}
@@ -21,7 +21,7 @@ public class WorkDAOImpl extends JpaDaoSupport implements WorkDAO {
 	 */
 	@Override
 	public Work findWorkById(final int id) {
-		return getJpaTemplate().getEntityManager().find(Work.class, id);
+		return entityManager.find(Work.class, id);
 	}
 
 	/**
@@ -31,6 +31,6 @@ public class WorkDAOImpl extends JpaDaoSupport implements WorkDAO {
 	 */
 	@Override
 	public void createWork(final Work work) {
-		getJpaTemplate().getEntityManager().persist(work);
+		entityManager.persist(work);
 	}
 }

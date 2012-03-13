@@ -5,24 +5,24 @@ package fr.min.school.dao.impl;
 
 import java.util.List;
 
-import org.springframework.orm.jpa.support.JpaDaoSupport;
-
 import fr.min.school.dao.UserDAO;
 import fr.min.school.model.Profile;
 import fr.min.school.model.User;
 
 /**
+ * DAO implementation for users.
+ * 
  * @author Wilfried Petit
  * 
  */
-public class UserDAOImpl extends JpaDaoSupport implements UserDAO {
+public class UserDAOImpl extends DAOImpl implements UserDAO {
 
 	/**
 	 * @see fr.min.school.dao.UserDAO#findUserById(int)
 	 */
 	@Override
 	public User findUserById(final int id) {
-		return getJpaTemplate().find(User.class, id);
+		return entityManager.find(User.class, id);
 	}
 
 	/**
@@ -31,9 +31,11 @@ public class UserDAOImpl extends JpaDaoSupport implements UserDAO {
 	 */
 	@Override
 	public User findUserByLoginPassord(final String login, final String password) {
-		return (User) getJpaTemplate().find(
-				"select u from user u where u.login=?1 and u.password=?2",
-				login, password).get(0);
+		return (User) entityManager
+				.createQuery(
+						"select u from user u where u.login=:login and u.password=:password")
+				.setParameter("login", login)
+				.setParameter("password", password).getSingleResult();
 	}
 
 	/**
@@ -47,7 +49,7 @@ public class UserDAOImpl extends JpaDaoSupport implements UserDAO {
 		user.setLogin(login);
 		user.setPassword(password);
 		user.setProfiles(profiles);
-		getJpaTemplate().persist(user);
+		entityManager.persist(user);
 	}
 
 }

@@ -5,8 +5,6 @@ package fr.min.school.dao.impl;
 
 import java.util.List;
 
-import org.springframework.orm.jpa.support.JpaDaoSupport;
-
 import fr.min.school.dao.StudentWorkDAO;
 import fr.min.school.model.StudentWork;
 
@@ -16,7 +14,7 @@ import fr.min.school.model.StudentWork;
  * @author Wilfried Petit
  * 
  */
-public class StudentWorkDAOImpl extends JpaDaoSupport implements StudentWorkDAO {
+public class StudentWorkDAOImpl extends DAOImpl implements StudentWorkDAO {
 
 	/**
 	 * {@inheritDoc}
@@ -26,8 +24,9 @@ public class StudentWorkDAOImpl extends JpaDaoSupport implements StudentWorkDAO 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<StudentWork> findStudentWorks(final int workId) {
-		return getJpaTemplate().find(
-				"select s from StudentWork where s.work.id=?1", workId);
+		return entityManager
+				.createQuery("select s from StudentWork where s.work.id=:id")
+				.setParameter("id", workId).getResultList();
 	}
 
 	/**
@@ -37,9 +36,10 @@ public class StudentWorkDAOImpl extends JpaDaoSupport implements StudentWorkDAO 
 	 */
 	@Override
 	public float getStudentWorksAverage(final int workId) {
-		return (Float) getJpaTemplate().find(
-				"select avg(s.mark) from StudentWork where s.work.id=?1",
-				workId).get(0);
+		return (Float) entityManager
+				.createQuery(
+						"select avg(s.mark) from StudentWork where s.work.id=id")
+				.setParameter("id", workId).getSingleResult();
 	}
 
 	/**
@@ -49,6 +49,6 @@ public class StudentWorkDAOImpl extends JpaDaoSupport implements StudentWorkDAO 
 	 */
 	@Override
 	public void createStudentWork(final StudentWork studentWork) {
-		getJpaTemplate().persist(studentWork);
+		entityManager.persist(studentWork);
 	}
 }

@@ -5,8 +5,6 @@ package fr.min.school.dao.impl;
 
 import java.util.List;
 
-import org.springframework.orm.jpa.support.JpaDaoSupport;
-
 import fr.min.school.dao.StudentDAO;
 import fr.min.school.model.Student;
 
@@ -16,7 +14,7 @@ import fr.min.school.model.Student;
  * @author Wilfried Petit
  * 
  */
-public class StudentDAOImpl extends JpaDaoSupport implements StudentDAO {
+public class StudentDAOImpl extends DAOImpl implements StudentDAO {
 
 	/**
 	 * {@inheritDoc}
@@ -25,7 +23,7 @@ public class StudentDAOImpl extends JpaDaoSupport implements StudentDAO {
 	 */
 	@Override
 	public Student findStudentById(final int id) {
-		return getJpaTemplate().find(Student.class, id);
+		return entityManager.find(Student.class, id);
 	}
 
 	/**
@@ -35,7 +33,7 @@ public class StudentDAOImpl extends JpaDaoSupport implements StudentDAO {
 	 */
 	@Override
 	public void createStudent(final Student student) {
-		getJpaTemplate().persist(student);
+		entityManager.persist(student);
 	}
 
 	/**
@@ -46,8 +44,9 @@ public class StudentDAOImpl extends JpaDaoSupport implements StudentDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Student> findStudentsByName(final String name) {
-		return getJpaTemplate().find("select s from Student s where s.name=?1",
-				name);
+		return entityManager
+				.createQuery("select s from Student s where s.name=:name")
+				.setParameter("name", name).getResultList();
 	}
 
 	/**
@@ -60,9 +59,11 @@ public class StudentDAOImpl extends JpaDaoSupport implements StudentDAO {
 	@Override
 	public List<Student> findStudentsByFirstnameAndName(final String firstname,
 			final String name) {
-		return getJpaTemplate().find(
-				"select s from Student s where s.firsname=?1, s.name=?2",
-				firstname, name);
+		return entityManager
+				.createQuery(
+						"select s from Student s where s.firstname=:firstname, s.name=:firstname")
+				.setParameter("firstname", firstname)
+				.setParameter("name", name).getResultList();
 	}
 
 }
