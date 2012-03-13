@@ -17,6 +17,6 @@ public abstract class DAOImpl {
 	/**
 	 * Entity Manager.
 	 */
-	@PersistenceContext(name = "SchoolPersistenceUnit")
+	@PersistenceContext(name="SchoolPersistenceUnit")
 	protected EntityManager entityManager;
 }
