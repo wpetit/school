@@ -36,7 +36,7 @@ public class SchoolDAOTest extends TestCase {
 		super.setUp();
 		final ApplicationContext applicationContext = new ClassPathXmlApplicationContext(
 				"ModelContext.xml");
-		this.schoolDao = (SchoolDAO) applicationContext.getBean("schoolDao");
+		schoolDao = (SchoolDAO) applicationContext.getBean("schoolDao");
 	}
 
 	/**
@@ -45,13 +45,13 @@ public class SchoolDAOTest extends TestCase {
 	@Test
 	public void testSaveOrUpdateWithValidSchoolData() {
 		final School school = new School();
-		school.setName("CollÃ¨ge de Chatelaudren");
+		school.setName("Collège de Chatelaudren");
 		school.setAddress("Chatelaudren");
-		this.schoolDao.createSchool(school);
+		schoolDao.createSchool(school);
 
 		List<School> schoolsFound;
 		try {
-			schoolsFound = this.schoolDao.findAll();
+			schoolsFound = schoolDao.findAll();
 			for (final School schoolFound : schoolsFound) {
 				Assert.assertEquals(school.getAddress(),
 						schoolFound.getAddress());
