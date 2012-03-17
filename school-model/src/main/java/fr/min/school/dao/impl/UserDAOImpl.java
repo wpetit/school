@@ -15,7 +15,7 @@ import fr.min.school.model.User;
  * @author Wilfried Petit
  * 
  */
-public class UserDAOImpl extends DAOImpl implements UserDAO {
+public class UserDAOImpl extends GenericDAOImpl<User, Integer> implements UserDAO {
 
 	/**
 	 * @see fr.min.school.dao.UserDAO#findUserById(int)

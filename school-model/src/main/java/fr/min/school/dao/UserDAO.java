@@ -14,7 +14,7 @@ import fr.min.school.model.User;
  * @author Wilfried Petit
  * 
  */
-public interface UserDAO {
+public interface UserDAO extends GenericDAO<User, Integer> {
 
 	/**
 	 * Find a user by its id.

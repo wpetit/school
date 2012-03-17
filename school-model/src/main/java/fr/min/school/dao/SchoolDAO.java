@@ -12,7 +12,7 @@ import fr.min.school.model.StudentClass;
  * @author Wilfried Petit
  * 
  */
-public interface SchoolDAO extends DAO {
+public interface SchoolDAO extends GenericDAO<School, Integer> {
 
 	/**
 	 * Create a school.
@@ -22,14 +22,7 @@ public interface SchoolDAO extends DAO {
 	 */
 	void createSchool(School school);
 
-	/**
-	 * Retreive all the school.
-	 * 
-	 * @return the schools found
-	 * @throws TechnicalException
-	 *             if no school was found
-	 */
-	List<School> findAll() throws TechnicalException;
+
 
 	/**
 	 * Return classes that depends on this school.

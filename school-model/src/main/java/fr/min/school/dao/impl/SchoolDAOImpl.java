@@ -16,28 +16,13 @@ import fr.min.school.model.StudentClass;
  * @author Wilfried Petit
  * 
  */
-public class SchoolDAOImpl extends DAOImpl implements SchoolDAO {
+public class SchoolDAOImpl extends GenericDAOImpl<School, Integer> implements SchoolDAO {
 
 	@Override
 	public void createSchool(final School school) {
 		entityManager.persist(school);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @see fr.min.school.dao.SchoolDAO#findAll()
-	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public List<School> findAll() throws TechnicalException {
-		final List<School> schools = entityManager.createQuery(
-				"select s from School s").getResultList();
-		if (schools == null) {
-			throw new TechnicalException("No school found");
-		}
-		return schools;
-	}
 
 	/**
 	 * {@inheritDoc}

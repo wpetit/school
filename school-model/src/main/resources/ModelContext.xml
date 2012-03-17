@@ -9,15 +9,16 @@
         http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 
+	<!-- inject an EntityManager in subclasses of GenericDao, which includes 
+		@PersistenceContext annotation -->
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+	
 	<bean id="workDao" class="fr.min.school.dao.impl.WorkDAOImpl" />
 	<bean id="studentWorkDao" class="fr.min.school.dao.impl.StudentWorkDAOImpl" />
 	<bean id="schoolDao" class="fr.min.school.dao.impl.SchoolDAOImpl" />
 	<bean id="studentClassDao" class="fr.min.school.dao.impl.StudentClassDAOImpl" />
 	<bean id="studentDao" class="fr.min.school.dao.impl.StudentDAOImpl" />
 	<bean id="disciplineDao" class="fr.min.school.dao.impl.DisciplineDAOImpl" />
-
-	<!-- Persistence settings -->
-	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 	
 	<bean name="propertyPlaceholder"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

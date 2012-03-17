@@ -13,7 +13,7 @@ import fr.min.school.model.Student;
  * @author Wilfried Petit
  * 
  */
-public interface StudentDAO {
+public interface StudentDAO extends GenericDAO<Student, Integer> {
 	/**
 	 * Find a student by its id.
 	 * 

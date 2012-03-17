@@ -11,6 +11,7 @@ import junit.framework.TestCase;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.dao.DataAccessException;
 
 import fr.min.school.exception.TechnicalException;
 import fr.min.school.model.School;
@@ -45,7 +46,7 @@ public class SchoolDAOTest extends TestCase {
 	@Test
 	public void testSaveOrUpdateWithValidSchoolData() {
 		final School school = new School();
-		school.setName("Collège de Chatelaudren");
+		school.setName("Collï¿½ge de Chatelaudren");
 		school.setAddress("Chatelaudren");
 		schoolDao.createSchool(school);
 
@@ -57,7 +58,7 @@ public class SchoolDAOTest extends TestCase {
 						schoolFound.getAddress());
 				Assert.assertEquals(school.getName(), schoolFound.getName());
 			}
-		} catch (final TechnicalException e) {
+		} catch (final DataAccessException e) {
 			Assert.fail();
 		}
 
