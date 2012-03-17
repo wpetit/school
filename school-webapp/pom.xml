@@ -40,7 +40,12 @@
 			<groupId>fr.min.school</groupId>
 			<artifactId>school-business</artifactId>
 		</dependency>
-		
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+		</dependency>
+
 		<dependency>
             <groupId>com.google.gwt</groupId>
             <artifactId>gwt-servlet</artifactId>
