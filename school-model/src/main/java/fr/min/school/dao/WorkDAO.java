@@ -11,7 +11,7 @@ import fr.min.school.model.Work;
  * @author Wilfried Petit
  * 
  */
-public interface WorkDAO {
+public interface WorkDAO extends GenericDAO<Work, Integer> {
 
 	/**
 	 * Return the work found for the id given.

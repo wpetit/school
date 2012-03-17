@@ -13,7 +13,7 @@ import fr.min.school.model.Discipline;
  * @author Wilfried Petit
  * 
  */
-public interface DisciplineDAO extends DAO {
+public interface DisciplineDAO extends GenericDAO<Discipline, Integer> {
 
 	/**
 	 * Returns all disciplines.

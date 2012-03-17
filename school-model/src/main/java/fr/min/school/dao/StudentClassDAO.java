@@ -15,7 +15,7 @@ import fr.min.school.model.StudentClass;
  * @author Wilfried Petit
  * 
  */
-public interface StudentClassDAO extends DAO {
+public interface StudentClassDAO extends GenericDAO<StudentClass, Integer> {
 
 	/**
 	 * Add a student to a student class.

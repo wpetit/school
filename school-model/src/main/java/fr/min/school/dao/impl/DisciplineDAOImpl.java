@@ -14,7 +14,7 @@ import fr.min.school.model.Discipline;
  * @author Wilfried Petit
  * 
  */
-public class DisciplineDAOImpl extends DAOImpl implements DisciplineDAO {
+public class DisciplineDAOImpl extends GenericDAOImpl<Discipline, Integer> implements DisciplineDAO {
 
 	/**
 	 * @see fr.min.school.dao.DisciplineDAO#getAllDisciplines()

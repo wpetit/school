@@ -12,7 +12,7 @@ import fr.min.school.model.Work;
  * @author Wilfried Petit
  * 
  */
-public class WorkDAOImpl extends DAOImpl implements WorkDAO {
+public class WorkDAOImpl extends GenericDAOImpl<Work, Integer> implements WorkDAO {
 
 	/**
 	 * {@inheritDoc}

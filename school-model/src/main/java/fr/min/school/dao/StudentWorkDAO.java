@@ -13,7 +13,8 @@ import fr.min.school.model.StudentWork;
  * @author Wilfried Petit
  * 
  */
-public interface StudentWorkDAO {
+public interface StudentWorkDAO extends GenericDAO<StudentWork, Integer> {
+	
 	List<StudentWork> findStudentWorks(int workId);
 
 	float getStudentWorksAverage(int workId);

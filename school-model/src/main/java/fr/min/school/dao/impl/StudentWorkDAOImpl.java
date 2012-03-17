@@ -14,7 +14,7 @@ import fr.min.school.model.StudentWork;
  * @author Wilfried Petit
  * 
  */
-public class StudentWorkDAOImpl extends DAOImpl implements StudentWorkDAO {
+public class StudentWorkDAOImpl extends GenericDAOImpl<StudentWork, Integer> implements StudentWorkDAO {
 
 	/**
 	 * {@inheritDoc}
