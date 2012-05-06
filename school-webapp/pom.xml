@@ -1,64 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<parent>
 		<artifactId>school</artifactId>
 		<groupId>fr.min.school</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
+	<modelVersion>4.0.0</modelVersion>
 	<artifactId>school-webapp</artifactId>
 	<name>school-webapp</name>
 	<description>School Web Application</description>
 	<packaging>war</packaging>
 
-	<build>
-		<finalName>school-webapp</finalName>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>gwt-maven-plugin</artifactId>
-				<version>2.3.0-1</version>
-				<executions>
-					<execution>
-						<phase>compile</phase>
-						<goals>
-							<goal>compile</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+	<properties>
+		<!-- Convenience property to set the GWT version -->
+		<gwtVersion>2.4.0</gwtVersion>
+		<!-- GWT needs at least java 1.5 -->
+		<webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
 	<dependencies>
+		<!-- School dependencies -->
 		<dependency>
 			<groupId>fr.min.school</groupId>
 			<artifactId>school-common</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>fr.min.school</groupId>
 			<artifactId>school-business</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
 		</dependency>
 
 		<dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-servlet</artifactId>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.google.gwt</groupId>
-            <artifactId>gwt-user</artifactId>
-        </dependency>
-<!--         <dependency> -->
-<!--             <groupId>com.google.gwt</groupId> -->
-<!--             <artifactId>gwt-dev</artifactId> -->
-<!--             <version>2.3.0</version> -->
-<!--         </dependency>   -->
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<scope>test</scope>
+		</dependency>
+
 	</dependencies>
+
+	<build>
+		<finalName>school-webapp</finalName>
+		<!-- Generate compiled stuff in the folder used for developing mode -->
+		<outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
+
+		<plugins>
+
+			<!-- GWT Maven Plugin -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<version>2.4.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+							<goal>test</goal>
+							<goal>i18n</goal>
+							<goal>generateAsync</goal>
+						</goals>
+					</execution>
+				</executions>
+				<!-- Plugin configuration. There are many available options, see gwt-maven-plugin 
+					documentation at codehaus.org -->
+				<configuration>
+					<runTarget>SchoolWebapp.html</runTarget>
+					<hostedWebapp>${webappDirectory}</hostedWebapp>
+					<i18nMessagesBundle>fr.min.school.webapp.client.Messages</i18nMessagesBundle>
+				</configuration>
+			</plugin>
+
+			<!-- Copy static web files before executing gwt:run -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<executions>
+					<execution>
+						<phase>compile</phase>
+						<goals>
+							<goal>exploded</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<webappDirectory>${webappDirectory}</webappDirectory>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

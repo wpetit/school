@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+  <!-- Inherit our applications main module.                      -->
+  <inherits name='fr.min.school.webapp.SchoolWebapp' />
+
+  <!-- Specify the path to any remote services.                   -->
+  <servlet path="/SchoolWebapp/greet" class="fr.min.school.webapp.server.authentication.AuthenticationServiceImpl" />
+
+</module>
