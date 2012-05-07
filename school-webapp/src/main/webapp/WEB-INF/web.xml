@@ -5,20 +5,31 @@
 
 <web-app>
 
-  <!-- Servlets -->
-  <servlet>
-    <servlet-name>greetServlet</servlet-name>
-    <servlet-class>fr.min.school.webapp.server.authentication.AuthenticationServiceImpl</servlet-class>
-  </servlet>
+	<!-- Listeners -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath*:ModelContext.xml,classpath*:BusinessContext.xml,WEB-INF/WebAppContext.xml
+		</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
 
-  <servlet-mapping>
-    <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/SchoolWebapp/greet</url-pattern>
-  </servlet-mapping>
+	<!-- Servlets -->
+	<servlet>
+		<servlet-name>authenticationServlet</servlet-name>
+		<servlet-class>fr.min.school.webapp.server.authentication.AuthenticationServiceImpl</servlet-class>
+	</servlet>
 
-  <!-- Default page to serve -->
-  <welcome-file-list>
-    <welcome-file>SchoolWebapp.html</welcome-file>
-  </welcome-file-list>
+	<servlet-mapping>
+		<servlet-name>authenticationServlet</servlet-name>
+		<url-pattern>/SchoolWebapp/authenticationService</url-pattern>
+	</servlet-mapping>
+
+	<!-- Default page to serve -->
+	<welcome-file-list>
+		<welcome-file>SchoolWebapp.html</welcome-file>
+	</welcome-file-list>
 
 </web-app>

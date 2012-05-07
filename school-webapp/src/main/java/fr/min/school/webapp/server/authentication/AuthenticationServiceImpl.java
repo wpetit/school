@@ -2,8 +2,10 @@ package fr.min.school.webapp.server.authentication;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
+import fr.min.school.business.UserBusiness;
+import fr.min.school.model.dto.UserDTO;
 import fr.min.school.webapp.client.authentication.AuthenticationService;
-import fr.min.school.webapp.shared.FieldVerifier;
+import fr.min.school.webapp.shared.AuthenticationVerifier;
 
 /**
  * The server side implementation of the RPC service.
@@ -12,43 +14,53 @@ import fr.min.school.webapp.shared.FieldVerifier;
 public class AuthenticationServiceImpl extends RemoteServiceServlet implements
 		AuthenticationService {
 
-	public String authenticate(String login, final String password)
+	/** User Business services **/
+	private UserBusiness userBusiness;
+
+	public String authenticate(final String login, final String password)
 			throws IllegalArgumentException {
 		// Verify that the input is valid.
-		if (!FieldVerifier.isValidName(login)) {
+		if (!AuthenticationVerifier.isValidLogin(login)) {
 			// If the input is not valid, throw an IllegalArgumentException back
 			// to
 			// the client.
 			throw new IllegalArgumentException(
 					"Name must be at least 4 characters long");
+		} else if (!AuthenticationVerifier.isValidPassword(password)) {
+			// If the input is not valid, throw an IllegalArgumentException back
+			// to
+			// the client.
+			throw new IllegalArgumentException(
+					"Password must be at least 8 characters long");
+		} else {
+			final UserDTO userDTO = userBusiness.findUserByLoginPassword(login,
+					password);
+
+			if (userDTO == null) {
+				throw new IllegalArgumentException("Invalid login/password");
+			} else {
+				return "Hello, " + userDTO.getLogin();
+			}
 		}
-
-		final String serverInfo = getServletContext().getServerInfo();
-		String userAgent = getThreadLocalRequest().getHeader("User-Agent");
-
-		// Escape data from the client to avoid cross-site script
-		// vulnerabilities.
-		login = escapeHtml(login);
-		userAgent = escapeHtml(userAgent);
-
-		return "Hello, " + login + "!<br>Your password is : " + password
-				+ ".<br><br>I am running " + serverInfo
-				+ ".<br><br>It looks like you are using:<br>" + userAgent;
 	}
 
 	/**
-	 * Escape an html string. Escaping data received from the client helps to
-	 * prevent cross-site script vulnerabilities.
+	 * Return the AuthenticationServiceImpl userBusiness.
 	 * 
-	 * @param html
-	 *            the html string to escape
-	 * @return the escaped string
+	 * @return the userBusiness
 	 */
-	private String escapeHtml(final String html) {
-		if (html == null) {
-			return null;
-		}
-		return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;")
-				.replaceAll(">", "&gt;");
+	public UserBusiness getUserBusiness() {
+		return userBusiness;
 	}
+
+	/**
+	 * Set the AuthenticationServiceImpl userBusiness.
+	 * 
+	 * @param userBusiness
+	 *            the userBusiness to set
+	 */
+	public void setUserBusiness(UserBusiness userBusiness) {
+		this.userBusiness = userBusiness;
+	}
+
 }

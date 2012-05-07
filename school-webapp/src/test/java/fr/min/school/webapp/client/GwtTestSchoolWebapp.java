@@ -9,7 +9,7 @@ import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 import fr.min.school.webapp.client.authentication.AuthenticationService;
 import fr.min.school.webapp.client.authentication.AuthenticationServiceAsync;
-import fr.min.school.webapp.shared.FieldVerifier;
+import fr.min.school.webapp.shared.AuthenticationVerifier;
 
 /**
  * GWT JUnit <b>integration</b> tests must extend GWTTestCase. Using
@@ -35,12 +35,12 @@ public class GwtTestSchoolWebapp extends GWTTestCase {
 	 * Tests the FieldVerifier.
 	 */
 	public void testFieldVerifier() {
-		Assert.assertFalse(FieldVerifier.isValidName(null));
-		Assert.assertFalse(FieldVerifier.isValidName(""));
-		Assert.assertFalse(FieldVerifier.isValidName("a"));
-		Assert.assertFalse(FieldVerifier.isValidName("ab"));
-		Assert.assertFalse(FieldVerifier.isValidName("abc"));
-		Assert.assertTrue(FieldVerifier.isValidName("abcd"));
+		Assert.assertFalse(AuthenticationVerifier.isValidLogin(null));
+		Assert.assertFalse(AuthenticationVerifier.isValidLogin(""));
+		Assert.assertFalse(AuthenticationVerifier.isValidLogin("a"));
+		Assert.assertFalse(AuthenticationVerifier.isValidLogin("ab"));
+		Assert.assertFalse(AuthenticationVerifier.isValidLogin("abc"));
+		Assert.assertTrue(AuthenticationVerifier.isValidLogin("abcd"));
 	}
 
 	/**

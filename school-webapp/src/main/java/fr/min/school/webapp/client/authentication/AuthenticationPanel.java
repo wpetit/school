@@ -21,7 +21,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 
 import fr.min.school.webapp.client.Messages;
 import fr.min.school.webapp.client.SchoolWebapp;
-import fr.min.school.webapp.shared.FieldVerifier;
+import fr.min.school.webapp.shared.AuthenticationVerifier;
 
 /**
  * Authentication Panel.
@@ -118,7 +118,7 @@ public class AuthenticationPanel extends VerticalPanel {
 				// First, we validate the input.
 				errorLabel.setText("");
 				final String login = loginField.getText();
-				if (!FieldVerifier.isValidName(login)) {
+				if (!AuthenticationVerifier.isValidLogin(login)) {
 					errorLabel.setText("Please enter at least four characters");
 					return;
 				}
@@ -137,7 +137,9 @@ public class AuthenticationPanel extends VerticalPanel {
 								serverResponseLabel
 										.addStyleName("serverResponseLabelError");
 								serverResponseLabel
-										.setHTML(SchoolWebapp.SERVER_ERROR);
+										.setHTML(SchoolWebapp.SERVER_ERROR
+												+ caught.getMessage()
+												+ caught.getStackTrace());
 								dialogBox.center();
 								closeButton.setFocus(true);
 							}
