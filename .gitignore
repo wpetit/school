@@ -6,3 +6,4 @@
 */.checkstyle
 /.project
 /target
+/.settings
