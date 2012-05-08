@@ -26,9 +26,16 @@ public interface UserDAO extends GenericDAO<User, Integer> {
 	User findUserById(final int id);
 
 	/**
-	 * Find a user by its login and its password.
+	 * Find a user by its login and its password. Return null if no one has been
+	 * found.
+	 * 
+	 * @param login
+	 *            its login.
+	 * @param password
+	 *            its password.
+	 * @return the user found.
 	 */
-	User findUserByLoginPassord(final String login, final String password);
+	User findUserByLoginPassword(final String login, final String password);
 
 	/**
 	 * Create a user.

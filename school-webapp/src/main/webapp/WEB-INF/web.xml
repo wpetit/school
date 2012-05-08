@@ -6,7 +6,7 @@
 <web-app>
 
 	<!-- Listeners -->
-	<context-param>
+ 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			classpath*:ModelContext.xml,classpath*:BusinessContext.xml,WEB-INF/WebAppContext.xml

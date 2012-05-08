@@ -20,8 +20,8 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
 import fr.min.school.webapp.client.Messages;
-import fr.min.school.webapp.client.SchoolWebapp;
 import fr.min.school.webapp.shared.AuthenticationVerifier;
+import fr.min.school.webapp.shared.Errors;
 
 /**
  * Authentication Panel.
@@ -30,6 +30,7 @@ import fr.min.school.webapp.shared.AuthenticationVerifier;
  * 
  */
 public class AuthenticationPanel extends VerticalPanel {
+
 	/**
 	 * Create a remote service proxy to talk to the server-side Authentication
 	 * service.
@@ -38,6 +39,7 @@ public class AuthenticationPanel extends VerticalPanel {
 			.create(AuthenticationService.class);
 
 	private final Messages messages = GWT.create(Messages.class);
+	private final Errors errors = GWT.create(Errors.class);
 
 	/**
 	 * Constructor.
@@ -119,10 +121,14 @@ public class AuthenticationPanel extends VerticalPanel {
 				errorLabel.setText("");
 				final String login = loginField.getText();
 				if (!AuthenticationVerifier.isValidLogin(login)) {
-					errorLabel.setText("Please enter at least four characters");
+					errorLabel.setText(errors.tooShortLogin());
 					return;
 				}
 				final String password = passwordField.getText();
+				if (!AuthenticationVerifier.isValidPassword(password)) {
+					errorLabel.setText(errors.tooShortPassword());
+					return;
+				}
 
 				// Then, we send the input to the server.
 				sendButton.setEnabled(false);
@@ -136,10 +142,10 @@ public class AuthenticationPanel extends VerticalPanel {
 										.setText("Remote Procedure Call - Failure");
 								serverResponseLabel
 										.addStyleName("serverResponseLabelError");
-								serverResponseLabel
-										.setHTML(SchoolWebapp.SERVER_ERROR
-												+ caught.getMessage()
-												+ caught.getStackTrace());
+								serverResponseLabel.setHTML(errors
+										.serverError()
+										+ caught.getMessage()
+										+ caught.getStackTrace());
 								dialogBox.center();
 								closeButton.setFocus(true);
 							}

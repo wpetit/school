@@ -38,6 +38,10 @@
 		<property name="mapper" ref="mapper" />
 	</bean>
 
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
 	<!-- the transactional advice (i.e. what 'happens'; see the <aop:advisor/> 
 		bean below) -->
 	<tx:advice id="txAdvice">
@@ -50,7 +54,7 @@
 
 	<aop:config>
 		<aop:pointcut id="serviceOperation"
-			expression="execution(* fr.min.school.dao..*DAO*.*(..))" />
+			expression="execution(* fr.min.school.business..*Business*.*(..))" />
 		<aop:advisor pointcut-ref="serviceOperation" advice-ref="txAdvice" />
 	</aop:config>
 

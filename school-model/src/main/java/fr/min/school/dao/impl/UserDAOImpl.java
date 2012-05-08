@@ -5,6 +5,8 @@ package fr.min.school.dao.impl;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
+
 import fr.min.school.dao.UserDAO;
 import fr.min.school.model.Profile;
 import fr.min.school.model.User;
@@ -15,7 +17,8 @@ import fr.min.school.model.User;
  * @author Wilfried Petit
  * 
  */
-public class UserDAOImpl extends GenericDAOImpl<User, Integer> implements UserDAO {
+public class UserDAOImpl extends GenericDAOImpl<User, Integer> implements
+		UserDAO {
 
 	/**
 	 * @see fr.min.school.dao.UserDAO#findUserById(int)
@@ -26,16 +29,21 @@ public class UserDAOImpl extends GenericDAOImpl<User, Integer> implements UserDA
 	}
 
 	/**
-	 * @see fr.min.school.dao.UserDAO#findUserByLoginPassord(java.lang.String,
+	 * @see fr.min.school.dao.UserDAO#findUserByLoginPassword(java.lang.String,
 	 *      java.lang.String)
 	 */
 	@Override
-	public User findUserByLoginPassord(final String login, final String password) {
-		return (User) entityManager
-				.createQuery(
-						"select u from user u where u.login=:login and u.password=:password")
-				.setParameter("login", login)
-				.setParameter("password", password).getSingleResult();
+	public User findUserByLoginPassword(final String login,
+			final String password) {
+		try {
+			return (User) entityManager
+					.createQuery(
+							"select u from User u where u.login=:login and u.password=:password")
+					.setParameter("login", login)
+					.setParameter("password", password).getSingleResult();
+		} catch (NoResultException noResultException) {
+			return null;
+		}
 	}
 
 	/**

@@ -9,6 +9,7 @@ import java.util.List;
 import fr.min.school.business.UserBusiness;
 import fr.min.school.dao.UserDAO;
 import fr.min.school.model.Profile;
+import fr.min.school.model.User;
 import fr.min.school.model.dto.ProfileDTO;
 import fr.min.school.model.dto.UserDTO;
 
@@ -56,8 +57,11 @@ public class UserBusinessImpl extends AbstractBusiness implements UserBusiness {
 	@Override
 	public UserDTO findUserByLoginPassword(final String login,
 			final String password) {
-		return mapper.map(userDAO.findUserByLoginPassord(login, password),
-				UserDTO.class);
+		User user = userDAO.findUserByLoginPassword(login, password);
+		if (user != null) {
+			return mapper.map(user, UserDTO.class);
+		} else {
+			return null;
+		}
 	}
-
 }

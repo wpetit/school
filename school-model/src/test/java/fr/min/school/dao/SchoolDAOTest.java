@@ -13,7 +13,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.dao.DataAccessException;
 
-import fr.min.school.exception.TechnicalException;
 import fr.min.school.model.School;
 
 /**

@@ -64,11 +64,21 @@
 
 		<plugins>
 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<source>${compileSource}</source>
+					<target>${compileTarget}</target>
+				</configuration>
+			</plugin>
+
 			<!-- GWT Maven Plugin -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>gwt-maven-plugin</artifactId>
-				<version>2.4.0</version>
+				<version>${gwt.version}</version>
 				<executions>
 					<execution>
 						<goals>
@@ -84,7 +94,10 @@
 				<configuration>
 					<runTarget>SchoolWebapp.html</runTarget>
 					<hostedWebapp>${webappDirectory}</hostedWebapp>
-					<i18nMessagesBundle>fr.min.school.webapp.client.Messages</i18nMessagesBundle>
+					<i18nMessagesBundles>
+						<i18nMessagesBundle>fr.min.school.webapp.client.Messages</i18nMessagesBundle>
+						<i18nMessagesBundle>fr.min.school.webapp.shared.Errors</i18nMessagesBundle>
+					</i18nMessagesBundles>
 				</configuration>
 			</plugin>
 
@@ -92,7 +105,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>2.1.1</version>
+				<version>2.2</version>
 				<executions>
 					<execution>
 						<phase>compile</phase>
@@ -103,15 +116,6 @@
 				</executions>
 				<configuration>
 					<webappDirectory>${webappDirectory}</webappDirectory>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>2.3.2</version>
-				<configuration>
-					<source>1.5</source>
-					<target>1.5</target>
 				</configuration>
 			</plugin>
 		</plugins>
