@@ -17,16 +17,19 @@ import fr.min.school.model.dto.UserDTO;
 public interface UserBusiness extends Business {
 
 	/**
-	 * Create a user from a login, a password and profiles.
+	 * Retrieve the profile list.
 	 * 
-	 * @param login
-	 *            the user login.
-	 * @param password
-	 *            the user password.
-	 * @param profiles
-	 *            profiles user belongs to.
+	 * @return the profile list.
 	 */
-	void createUser(String login, String password, List<ProfileDTO> profiles);
+	List<ProfileDTO> retrieveProfiles();
+
+	/**
+	 * Create a user from a userDTO.
+	 * 
+	 * @param userDTO
+	 *            the user.
+	 */
+	void createUser(UserDTO userDTO);
 
 	/**
 	 * Find a user by its login and its password.

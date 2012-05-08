@@ -50,6 +50,11 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.smartgwt</groupId>
+			<artifactId>smartgwt</artifactId>
+		</dependency>
+
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
@@ -63,6 +68,30 @@
 		<outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
 
 		<plugins>
+
+			<plugin>
+				<groupId>fr.maven.dto</groupId>
+				<artifactId>dto-maven-plugin</artifactId>
+				<version>1.0</version>
+				<executions>
+					<execution>
+						<id>generate-sources</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>dto</goal>
+						</goals>
+						<configuration>
+							<!-- The directory where the DTO classes will be generated, default 
+								value is target/generated-sources -->
+							<generatedDirectory>target/generated-sources</generatedDirectory>
+							<!-- The list of classes you want to generate DTO classes for. -->
+							<includes>
+								<include>fr.min.school.model.*</include>
+							</includes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -92,6 +121,7 @@
 				<!-- Plugin configuration. There are many available options, see gwt-maven-plugin 
 					documentation at codehaus.org -->
 				<configuration>
+					<module>fr.min.school.webapp.SchoolWebapp</module>
 					<runTarget>SchoolWebapp.html</runTarget>
 					<hostedWebapp>${webappDirectory}</hostedWebapp>
 					<i18nMessagesBundles>

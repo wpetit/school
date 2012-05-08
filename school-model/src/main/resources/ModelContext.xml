@@ -20,6 +20,7 @@
 	<bean id="studentDao" class="fr.min.school.dao.impl.StudentDAOImpl" />
 	<bean id="disciplineDao" class="fr.min.school.dao.impl.DisciplineDAOImpl" />
 	<bean id="userDao" class="fr.min.school.dao.impl.UserDAOImpl"/>
+	<bean id="profileDao" class="fr.min.school.dao.impl.ProfileDAOImpl"/>
 	
 	<bean name="propertyPlaceholder"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

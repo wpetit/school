@@ -3,6 +3,8 @@ package fr.min.school.webapp.client.authentication;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
+import fr.min.school.model.dto.UserDTO;
+
 /**
  * The client side stub for the authentication RPC service.
  * 
@@ -18,12 +20,11 @@ public interface AuthenticationService extends RemoteService {
 	 *            the user login.
 	 * @param password
 	 *            the user password.
-	 * @return the text "Hello, login" if the user has been successfully
-	 *         authenticated.
+	 * @return the user logged in.
 	 * @throws IllegalArgumentException
 	 *             if the login or the password are invalid.
 	 */
-	String authenticate(final String login, final String password)
+	UserDTO authenticate(final String login, final String password)
 			throws IllegalArgumentException;
 
 }

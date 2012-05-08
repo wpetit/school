@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.min.school.business.UserBusiness;
+import fr.min.school.dao.ProfileDAO;
 import fr.min.school.dao.UserDAO;
 import fr.min.school.model.Profile;
 import fr.min.school.model.User;
@@ -21,10 +22,11 @@ import fr.min.school.model.dto.UserDTO;
  */
 public class UserBusinessImpl extends AbstractBusiness implements UserBusiness {
 
-	/**
-	 * User dao.
-	 */
+	/** User dao. **/
 	private UserDAO userDAO;
+
+	/** Profile DAO. **/
+	private ProfileDAO profileDAO;
 
 	/**
 	 * Set the userDAO use by the business.
@@ -37,31 +39,34 @@ public class UserBusinessImpl extends AbstractBusiness implements UserBusiness {
 	}
 
 	/**
-	 * @see fr.min.school.business.UserBusiness#createUser(java.lang.String,
-	 *      java.lang.String, java.util.List)
+	 * Set the profileDAO use by the business.
+	 * 
+	 * @param profileDAO
+	 *            the profileDAO to set
 	 */
-	@Override
-	public void createUser(final String login, final String password,
-			final List<ProfileDTO> profiles) {
-		final List<Profile> realProfiles = new ArrayList<Profile>();
-		for (final ProfileDTO profile : profiles) {
-			mapper.map(profile, Profile.class);
-		}
-		userDAO.createUser(login, password, realProfiles);
+	public void setProfileDAO(final ProfileDAO profileDAO) {
+		this.profileDAO = profileDAO;
 	}
 
-	/**
-	 * @see fr.min.school.business.UserBusiness#findUserByLoginPassword(java.lang.String,
-	 *      java.lang.String)
-	 */
+	@Override
+	public void createUser(final UserDTO userDTO) {
+		User user = mapper.map(userDTO, User.class);
+		userDAO.createUser(user);
+	}
+
 	@Override
 	public UserDTO findUserByLoginPassword(final String login,
 			final String password) {
-		User user = userDAO.findUserByLoginPassword(login, password);
-		if (user != null) {
-			return mapper.map(user, UserDTO.class);
-		} else {
-			return null;
+		return mapper.map(userDAO.findUserByLoginPassword(login, password),
+				UserDTO.class);
+	}
+
+	@Override
+	public List<ProfileDTO> retrieveProfiles() {
+		List<ProfileDTO> profileDTOs = new ArrayList<ProfileDTO>();
+		for (Profile profile : profileDAO.findAll()) {
+			profileDTOs.add(mapper.map(profile, ProfileDTO.class));
 		}
+		return profileDTOs;
 	}
 }

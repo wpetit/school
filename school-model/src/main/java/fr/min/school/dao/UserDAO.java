@@ -3,9 +3,6 @@
  */
 package fr.min.school.dao;
 
-import java.util.List;
-
-import fr.min.school.model.Profile;
 import fr.min.school.model.User;
 
 /**
@@ -40,13 +37,8 @@ public interface UserDAO extends GenericDAO<User, Integer> {
 	/**
 	 * Create a user.
 	 * 
-	 * @param login
-	 *            the user login.
-	 * @param password
-	 *            the user password.
-	 * @param profiles
-	 *            profiles the user belongs to.
+	 * @param user
+	 *            the user to create.
 	 */
-	void createUser(final String login, final String password,
-			final List<Profile> profiles);
+	void createUser(final User user);
 }

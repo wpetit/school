@@ -13,8 +13,13 @@
   <inherits name='com.google.gwt.user.theme.standard.Standard' />
   <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
   <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/>     -->
+  
+  <!--  Inherit SmartGWT -->
+   <inherits name="com.smartgwt.SmartGwt"/>
+  
+  <!-- Inherit DTO module -->
+  <inherits name='fr.min.school.model.SchoolDTO' />
 
-  <!-- Other module inherits                                      -->
 
   <!-- Specify the app entry point class.                         -->
   <entry-point class='fr.min.school.webapp.client.SchoolWebapp' />
@@ -22,6 +27,5 @@
   <!-- Specify the paths for translatable code                    -->
   <source path='client' />
   <source path='shared' />
-  <source path='**/dto/**' />
 
 </module>

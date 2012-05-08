@@ -40,6 +40,7 @@
 		<hibernate.version>3.5.6-Final</hibernate.version>
 		<hibernate-validator.version>4.2.0.Final</hibernate-validator.version>
 		<gwt.version>2.4.0</gwt.version>
+		<smartgwt.version>2.4</smartgwt.version>
 		<cxf.version>2.0.12</cxf.version>
 		<commons-dbcp.version>1.4</commons-dbcp.version>
 		<aspectjweaver.version>1.6.1</aspectjweaver.version>
@@ -72,7 +73,7 @@
 				<artifactId>school-business</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>fr.min.school</groupId>
 				<artifactId>school-business</artifactId>
@@ -103,7 +104,7 @@
 				<artifactId>spring-orm</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-web</artifactId>
@@ -127,7 +128,7 @@
 				<artifactId>hibernate-entitymanager</artifactId>
 				<version>${hibernate.version}</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-validator</artifactId>
@@ -144,6 +145,12 @@
 				<groupId>com.google.gwt</groupId>
 				<artifactId>gwt-user</artifactId>
 				<version>${gwt.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.smartgwt</groupId>
+				<artifactId>smartgwt</artifactId>
+				<version>${smartgwt.version}</version>
 			</dependency>
 
 			<dependency>

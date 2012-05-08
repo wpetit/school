@@ -21,7 +21,7 @@ public class AuthenticationServiceImpl extends RemoteServiceServlet implements
 	private UserBusiness userBusiness;
 
 	@Override
-	public String authenticate(final String login, final String password)
+	public UserDTO authenticate(final String login, final String password)
 			throws IllegalArgumentException {
 		WebApplicationContext ctx = WebApplicationContextUtils
 				.getWebApplicationContext(getServletContext());
@@ -36,7 +36,7 @@ public class AuthenticationServiceImpl extends RemoteServiceServlet implements
 		if (userDTO == null) {
 			throw new IllegalArgumentException("Invalid login or password.");
 		} else {
-			return "Hel, " + userDTO.getLogin();
+			return userDTO;
 		}
 	}
 
