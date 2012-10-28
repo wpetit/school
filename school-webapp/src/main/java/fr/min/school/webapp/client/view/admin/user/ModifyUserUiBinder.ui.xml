@@ -1,0 +1,25 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		/* Add CSS here. See the GWT docs on UI Binder for more details */
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:DecoratorPanel>
+		<g:VerticalPanel height="204px" width="224px" horizontalAlignment="ALIGN_CENTER">
+			<g:HorizontalPanel width="100%" horizontalAlignment="ALIGN_RIGHT" verticalAlignment="ALIGN_MIDDLE">
+				<g:Label text="Login :"/>
+				<g:TextBox ui:field="loginTextField"/>
+			</g:HorizontalPanel>
+			<g:HorizontalPanel horizontalAlignment="ALIGN_RIGHT" verticalAlignment="ALIGN_MIDDLE" width="100%">
+				<g:Label text="Password :"/>
+				<g:TextBox ui:field="passwordTextField"/>
+			</g:HorizontalPanel>
+			<g:ListBox width="100%" ui:field="profileListBox"/>
+			<g:Button ui:field="button">Valider</g:Button>
+			<g:InlineLabel ui:field="informationsLabel"/>
+		</g:VerticalPanel>
+	</g:DecoratorPanel>
+</ui:UiBinder> 
