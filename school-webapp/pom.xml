@@ -124,6 +124,7 @@
 					<module>fr.min.school.webapp.SchoolWebapp</module>
 					<runTarget>SchoolWebapp.html</runTarget>
 					<hostedWebapp>${webappDirectory}</hostedWebapp>
+					<generateDirectory>${project.build.directory}/generated-sources</generateDirectory>
 					<i18nMessagesBundles>
 						<i18nMessagesBundle>fr.min.school.webapp.client.Messages</i18nMessagesBundle>
 						<i18nMessagesBundle>fr.min.school.webapp.shared.Errors</i18nMessagesBundle>

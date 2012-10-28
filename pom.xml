@@ -37,14 +37,14 @@
 		<compileTarget>1.6</compileTarget>
 
 		<spring.version>3.1.1.RELEASE</spring.version>
-		<hibernate.version>3.5.6-Final</hibernate.version>
-		<hibernate-validator.version>4.2.0.Final</hibernate-validator.version>
+		<hibernate.version>4.1.5.Final</hibernate.version>
+		<hibernate-validator.version>4.3.0.Final</hibernate-validator.version>
 		<gwt.version>2.4.0</gwt.version>
 		<smartgwt.version>2.4</smartgwt.version>
-		<cxf.version>2.0.12</cxf.version>
+		<cxf.version>2.6.1</cxf.version>
 		<commons-dbcp.version>1.4</commons-dbcp.version>
-		<aspectjweaver.version>1.6.1</aspectjweaver.version>
-		<logback.version>1.0.0</logback.version>
+		<aspectjweaver.version>1.7.0</aspectjweaver.version>
+		<logback.version>1.0.6</logback.version>
 		<dozer.version>5.3.2</dozer.version>
 
 		<!-- Tests librairies -->
@@ -120,7 +120,7 @@
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-annotations</artifactId>
-				<version>${hibernate.version}</version>
+				<version>${hibernate-annotations.version}</version>
 			</dependency>
 
 			<dependency>

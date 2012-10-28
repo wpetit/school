@@ -12,8 +12,7 @@ import org.springframework.dao.DataAccessException;
  * 
  * @author rebourgi
  * 
- * @param <T,PK>
- *            Table et primary key
+ * @param <T,PK> Table et primary key
  */
 public interface GenericDAO<T, PK> {
 
@@ -31,6 +30,14 @@ public interface GenericDAO<T, PK> {
 	 * @throws DataAccessException
 	 */
 	public void refresh(T o);
+
+	/**
+	 * Save object persistant
+	 * 
+	 * @param o
+	 * @throws DataAccessException
+	 */
+	public void save(T o);
 
 	/**
 	 * Persist un object dans la base
@@ -51,8 +58,8 @@ public interface GenericDAO<T, PK> {
 	public void remove(T o);
 
 	/**
-	 * Charge un objet persistant à partir d'un id, retourne null 
-	 * si il n'existe pas
+	 * Charge un objet persistant à partir d'un id, retourne null si il
+	 * n'existe pas
 	 * 
 	 * @param id
 	 *            l'id de l'objet persistant
@@ -62,8 +69,8 @@ public interface GenericDAO<T, PK> {
 	public T find(PK id);
 
 	/**
-	 * Charge un objet persistant à partir d'un id, retourne une exception 
-	 * si il n'existe pas
+	 * Charge un objet persistant à partir d'un id, retourne une exception si
+	 * il n'existe pas
 	 * 
 	 * @param id
 	 *            l'id de l'objet persistant

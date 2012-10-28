@@ -32,6 +32,14 @@ public interface UserBusiness extends Business {
 	void createUser(UserDTO userDTO);
 
 	/**
+	 * Update a user from a userDTO.
+	 * 
+	 * @param userDTO
+	 *            the user.
+	 */
+	void updateUser(UserDTO userDTO);
+
+	/**
 	 * Find a user by its login and its password.
 	 * 
 	 * @param login

@@ -55,6 +55,12 @@ public class UserBusinessImpl extends AbstractBusiness implements UserBusiness {
 	}
 
 	@Override
+	public void updateUser(final UserDTO userDTO) {
+		User user = mapper.map(userDTO, User.class);
+		userDAO.refresh(user);
+	}
+
+	@Override
 	public UserDTO findUserByLoginPassword(final String login,
 			final String password) {
 		return mapper.map(userDAO.findUserByLoginPassword(login, password),

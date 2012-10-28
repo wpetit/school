@@ -10,7 +10,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import fr.min.school.business.UserBusiness;
 import fr.min.school.model.dto.ProfileDTO;
 import fr.min.school.model.dto.UserDTO;
-import fr.min.school.webapp.client.admin.UserService;
+import fr.min.school.webapp.client.admin.user.UserService;
 
 /**
  * The server side implementation of the RPC service.
@@ -38,6 +38,16 @@ public class UserServiceImpl extends RemoteServiceServlet implements
 				.getWebApplicationContext(getServletContext());
 		userBusiness = (UserBusiness) ctx.getBean("userBusiness");
 		return userBusiness.retrieveProfiles();
+	}
+
+	@Override
+	public void updateUser(UserDTO userDTO) {
+		WebApplicationContext ctx = WebApplicationContextUtils
+				.getWebApplicationContext(getServletContext());
+		userBusiness = (UserBusiness) ctx.getBean("userBusiness");
+
+		// Create the user with these informations.
+		userBusiness.updateUser(userDTO);
 	}
 
 }
