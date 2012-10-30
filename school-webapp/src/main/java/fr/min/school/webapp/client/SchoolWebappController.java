@@ -4,12 +4,10 @@
 package fr.min.school.webapp.client;
 
 import com.google.gwt.event.shared.HandlerManager;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.smartgwt.client.widgets.layout.Layout;
-import com.smartgwt.client.widgets.layout.VLayout;
+import com.google.gwt.user.client.ui.VerticalPanel;
 
 import fr.min.school.webapp.client.event.SuccessfulAuthenticationEvent;
 import fr.min.school.webapp.client.event.SuccessfulAuthenticationEventHandler;
@@ -22,8 +20,8 @@ import fr.min.school.webapp.client.view.authentication.AuthenticationUiBinder;
  */
 public class SchoolWebappController {
 
-	/** Central Panel Layout **/
-	private Layout centralPanelLayout;
+	/** Main Panel **/
+	private Panel mainPanel;
 
 	/** Authentication Panel **/
 	private AuthenticationUiBinder authenticationUiBinder;
@@ -48,8 +46,6 @@ public class SchoolWebappController {
 					@Override
 					public void onSuccessfulAuthentication(
 							SuccessfulAuthenticationEvent event) {
-						Window.alert("successful event catch "
-								+ event.getUserId());
 						displayFavouriteScreen(event.getUserId());
 					}
 				});
@@ -60,21 +56,21 @@ public class SchoolWebappController {
 		eventBus = new HandlerManager(null);
 		authenticationUiBinder = new AuthenticationUiBinder(eventBus);
 		createUserUiBinder = new CreateUserUiBinder(eventBus);
-		centralPanelLayout = new VLayout(20);
 		errorLabel = new Label("");
-		centralPanelLayout.addMember(authenticationUiBinder);
-		centralPanel.add(centralPanelLayout);
+		mainPanel = new VerticalPanel();
+		mainPanel.add(authenticationUiBinder);
+		centralPanel.add(mainPanel);
 		centralPanel.add(errorLabel);
 	}
 
 	public void displayAuthentication() {
-		centralPanelLayout.clear();
-		centralPanelLayout.addMember(authenticationUiBinder);
+		mainPanel.clear();
+		mainPanel.add(authenticationUiBinder);
 	}
 
 	public void displayCreateUser() {
-		centralPanelLayout.clear();
-		centralPanelLayout.addMember(authenticationUiBinder);
+		mainPanel.clear();
+		mainPanel.add(createUserUiBinder);
 	}
 
 	/**
@@ -96,11 +92,10 @@ public class SchoolWebappController {
 	public void displayFavouriteScreen(int userId) {
 		// TODO deal with profiles
 		if (1 == userId) {
-			setErrorText("");
 			displayCreateUser();
 		} else {
 			// TODO redirect to the good panel
-			setErrorText(userId + " successfully logged in.");
+			setErrorText(userId + "Favourite screen not yet implemented.");
 		}
 	}
 }

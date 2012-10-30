@@ -50,4 +50,11 @@ public interface UserBusiness extends Business {
 	 */
 	UserDTO findUserByLoginPassword(String login, String password);
 
+	/**
+	 * Retrieve all users.
+	 * 
+	 * @return users found.
+	 */
+	List<UserDTO> retrieveUsers();
+
 }

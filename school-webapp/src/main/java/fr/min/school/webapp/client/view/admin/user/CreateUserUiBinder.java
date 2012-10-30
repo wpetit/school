@@ -109,12 +109,12 @@ public class CreateUserUiBinder extends Composite {
 
 					@Override
 					public void onFailure(Throwable caught) {
-						informationsLabel.setText("user creation failed.");
+						informationsLabel.setText("User creation failed.");
 					}
 
 					@Override
 					public void onSuccess(Void result) {
-						informationsLabel.setText("user created successfully.");
+						informationsLabel.setText("User created successfully.");
 					}
 				});
 	}

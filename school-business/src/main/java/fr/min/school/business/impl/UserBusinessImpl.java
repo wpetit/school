@@ -75,4 +75,16 @@ public class UserBusinessImpl extends AbstractBusiness implements UserBusiness {
 		}
 		return profileDTOs;
 	}
+
+	/**
+	 * @see fr.min.school.business.UserBusiness#retrieveUsers()
+	 */
+	@Override
+	public List<UserDTO> retrieveUsers() {
+		List<UserDTO> userDTOs = new ArrayList<UserDTO>();
+		for (User user : userDAO.findAll()) {
+			userDTOs.add(mapper.map(user, UserDTO.class));
+		}
+		return userDTOs;
+	}
 }

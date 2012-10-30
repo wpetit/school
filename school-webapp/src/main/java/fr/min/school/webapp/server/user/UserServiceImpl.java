@@ -19,15 +19,11 @@ import fr.min.school.webapp.client.admin.user.UserService;
 public class UserServiceImpl extends RemoteServiceServlet implements
 		UserService {
 
-	/** User Business services **/
-	private UserBusiness userBusiness;
-
 	@Override
 	public void createUser(UserDTO userDTO) {
 		WebApplicationContext ctx = WebApplicationContextUtils
 				.getWebApplicationContext(getServletContext());
-		userBusiness = (UserBusiness) ctx.getBean("userBusiness");
-
+		UserBusiness userBusiness = (UserBusiness) ctx.getBean("userBusiness");
 		// Create the user with these informations.
 		userBusiness.createUser(userDTO);
 	}
@@ -36,7 +32,7 @@ public class UserServiceImpl extends RemoteServiceServlet implements
 	public List<ProfileDTO> retrieveProfiles() {
 		WebApplicationContext ctx = WebApplicationContextUtils
 				.getWebApplicationContext(getServletContext());
-		userBusiness = (UserBusiness) ctx.getBean("userBusiness");
+		UserBusiness userBusiness = (UserBusiness) ctx.getBean("userBusiness");
 		return userBusiness.retrieveProfiles();
 	}
 
@@ -44,10 +40,20 @@ public class UserServiceImpl extends RemoteServiceServlet implements
 	public void updateUser(UserDTO userDTO) {
 		WebApplicationContext ctx = WebApplicationContextUtils
 				.getWebApplicationContext(getServletContext());
-		userBusiness = (UserBusiness) ctx.getBean("userBusiness");
-
+		UserBusiness userBusiness = (UserBusiness) ctx.getBean("userBusiness");
 		// Create the user with these informations.
 		userBusiness.updateUser(userDTO);
+	}
+
+	/**
+	 * @see fr.min.school.webapp.client.admin.user.UserService#retrieveUsers()
+	 */
+	@Override
+	public List<UserDTO> retrieveUsers() {
+		WebApplicationContext ctx = WebApplicationContextUtils
+				.getWebApplicationContext(getServletContext());
+		UserBusiness userBusiness = (UserBusiness) ctx.getBean("userBusiness");
+		return userBusiness.retrieveUsers();
 	}
 
 }

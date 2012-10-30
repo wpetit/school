@@ -39,4 +39,11 @@ public interface UserService extends RemoteService {
 	 */
 	void updateUser(final UserDTO userDTO);
 
+	/**
+	 * Retrieve all users.
+	 * 
+	 * @return users found.
+	 */
+	List<UserDTO> retrieveUsers();
+
 }
