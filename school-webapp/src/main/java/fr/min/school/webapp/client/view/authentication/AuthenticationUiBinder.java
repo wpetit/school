@@ -20,7 +20,7 @@ import com.google.gwt.user.client.ui.Widget;
 import fr.min.school.model.dto.UserDTO;
 import fr.min.school.webapp.client.authentication.AuthenticationService;
 import fr.min.school.webapp.client.authentication.AuthenticationServiceAsync;
-import fr.min.school.webapp.client.event.SuccessfulAuthenticationEvent;
+import fr.min.school.webapp.client.event.authentication.SuccessfulAuthenticationEvent;
 import fr.min.school.webapp.shared.AuthenticationVerifier;
 
 /**

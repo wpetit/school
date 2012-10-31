@@ -3,7 +3,6 @@
  */
 package fr.min.school.webapp.client.view.admin.user;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -25,6 +24,7 @@ import fr.min.school.model.dto.ProfileDTO;
 import fr.min.school.model.dto.UserDTO;
 import fr.min.school.webapp.client.admin.user.UserService;
 import fr.min.school.webapp.client.admin.user.UserServiceAsync;
+import fr.min.school.webapp.client.event.admin.user.UserCreationEvent;
 
 /**
  * @author Wilfried Petit
@@ -56,6 +56,17 @@ public class CreateUserUiBinder extends Composite {
 	@UiField
 	TextBox passwordTextField;
 
+	@UiField
+	TextBox nameTextField;
+
+	@UiField
+	TextBox firstnameTextField;
+
+	@UiField
+	TextBox emailTextField;
+
+	private HandlerManager eventBus;
+
 	private LinkedHashMap<String, ProfileDTO> profilesMap;
 
 	interface CreateUserUiBinderUiBinder extends
@@ -72,6 +83,7 @@ public class CreateUserUiBinder extends Composite {
 	 * HasHTML instead of HasText.
 	 */
 	public CreateUserUiBinder(HandlerManager eventBus) {
+		this.eventBus = eventBus;
 		initWidget(CreateUserUiBinder.uiBinder.createAndBindUi(this));
 		profilesMap = new LinkedHashMap<String, ProfileDTO>();
 		CreateUserUiBinder.userService
@@ -100,10 +112,11 @@ public class CreateUserUiBinder extends Composite {
 		UserDTO userDTO = new UserDTO();
 		userDTO.setLogin(loginTextField.getText());
 		userDTO.setPassword(passwordTextField.getText());
-		List<ProfileDTO> profiles = new ArrayList<ProfileDTO>();
-		profiles.add(profilesMap.get(profileListBox.getValue(profileListBox
-				.getSelectedIndex())));
-		userDTO.setProfiles(profiles);
+		userDTO.setFirstname(firstnameTextField.getText());
+		userDTO.setName(nameTextField.getText());
+		userDTO.setEmail(emailTextField.getText());
+		userDTO.setProfile(profilesMap.get(profileListBox
+				.getValue(profileListBox.getSelectedIndex())));
 		CreateUserUiBinder.userService.createUser(userDTO,
 				new AsyncCallback<Void>() {
 
@@ -115,6 +128,7 @@ public class CreateUserUiBinder extends Composite {
 					@Override
 					public void onSuccess(Void result) {
 						informationsLabel.setText("User created successfully.");
+						eventBus.fireEvent(new UserCreationEvent());
 					}
 				});
 	}

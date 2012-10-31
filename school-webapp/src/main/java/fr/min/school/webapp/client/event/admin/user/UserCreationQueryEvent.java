@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.min.school.webapp.client.event;
+package fr.min.school.webapp.client.event.admin.user;
 
 import com.google.gwt.event.shared.GwtEvent;
 

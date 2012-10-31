@@ -17,6 +17,18 @@
 				<g:Label text="Password :"/>
 				<g:TextBox ui:field="passwordTextField"/>
 			</g:HorizontalPanel>
+			<g:HorizontalPanel horizontalAlignment="ALIGN_RIGHT" verticalAlignment="ALIGN_MIDDLE" width="100%">
+				<g:Label text="Nom :"/>
+				<g:TextBox ui:field="nameTextField"/>
+			</g:HorizontalPanel>
+			<g:HorizontalPanel horizontalAlignment="ALIGN_RIGHT" verticalAlignment="ALIGN_MIDDLE" width="100%">
+				<g:Label text="Prenom :"/>
+				<g:TextBox ui:field="firstnameTextField"/>
+			</g:HorizontalPanel>
+			<g:HorizontalPanel horizontalAlignment="ALIGN_RIGHT" verticalAlignment="ALIGN_MIDDLE" width="100%">
+				<g:Label text="Email :"/>
+				<g:TextBox ui:field="emailTextField"/>
+			</g:HorizontalPanel>
 			<g:ListBox width="100%" ui:field="profileListBox"/>
 			<g:Button ui:field="button">Valider</g:Button>
 			<g:InlineLabel ui:field="informationsLabel"/>

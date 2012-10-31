@@ -9,9 +9,17 @@ import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import fr.min.school.webapp.client.event.SuccessfulAuthenticationEvent;
-import fr.min.school.webapp.client.event.SuccessfulAuthenticationEventHandler;
+import fr.min.school.webapp.client.event.admin.user.UserCreationEvent;
+import fr.min.school.webapp.client.event.admin.user.UserCreationEventHandler;
+import fr.min.school.webapp.client.event.admin.user.UserCreationQueryEvent;
+import fr.min.school.webapp.client.event.admin.user.UserCreationQueryEventHandler;
+import fr.min.school.webapp.client.event.admin.user.UserModificationQueryEvent;
+import fr.min.school.webapp.client.event.admin.user.UserModificationQueryEventHandler;
+import fr.min.school.webapp.client.event.authentication.SuccessfulAuthenticationEvent;
+import fr.min.school.webapp.client.event.authentication.SuccessfulAuthenticationEventHandler;
 import fr.min.school.webapp.client.view.admin.user.CreateUserUiBinder;
+import fr.min.school.webapp.client.view.admin.user.DisplayUsersUiBinder;
+import fr.min.school.webapp.client.view.admin.user.ModifyUserUiBinder;
 import fr.min.school.webapp.client.view.authentication.AuthenticationUiBinder;
 
 /**
@@ -22,12 +30,6 @@ public class SchoolWebappController {
 
 	/** Main Panel **/
 	private Panel mainPanel;
-
-	/** Authentication Panel **/
-	private AuthenticationUiBinder authenticationUiBinder;
-
-	/** Create User UI **/
-	private CreateUserUiBinder createUserUiBinder;
 
 	/** The error label **/
 	private Label errorLabel;
@@ -49,28 +51,61 @@ public class SchoolWebappController {
 						displayFavouriteScreen(event.getUserId());
 					}
 				});
+
+		eventBus.addHandler(UserCreationQueryEvent.TYPE,
+				new UserCreationQueryEventHandler() {
+					@Override
+					public void onUserCreationQuery(UserCreationQueryEvent event) {
+						displayCreateUser();
+					}
+				});
+
+		eventBus.addHandler(UserModificationQueryEvent.TYPE,
+				new UserModificationQueryEventHandler() {
+					@Override
+					public void onUserModificationQuery(
+							UserModificationQueryEvent event) {
+						displayModifyUser();
+					}
+				});
+
+		eventBus.addHandler(UserCreationEvent.TYPE,
+				new UserCreationEventHandler() {
+					@Override
+					public void onUserCreation(UserCreationEvent event) {
+						displayUsers();
+					}
+				});
 	}
 
 	public void bind() {
 		Panel centralPanel = RootPanel.get("centralPanel");
 		eventBus = new HandlerManager(null);
-		authenticationUiBinder = new AuthenticationUiBinder(eventBus);
-		createUserUiBinder = new CreateUserUiBinder(eventBus);
 		errorLabel = new Label("");
 		mainPanel = new VerticalPanel();
-		mainPanel.add(authenticationUiBinder);
+		mainPanel.add(new AuthenticationUiBinder(eventBus));
 		centralPanel.add(mainPanel);
 		centralPanel.add(errorLabel);
 	}
 
 	public void displayAuthentication() {
 		mainPanel.clear();
-		mainPanel.add(authenticationUiBinder);
+		mainPanel.add(new AuthenticationUiBinder(eventBus));
 	}
 
 	public void displayCreateUser() {
 		mainPanel.clear();
-		mainPanel.add(createUserUiBinder);
+		mainPanel.add(new CreateUserUiBinder(eventBus));
+	}
+
+	public void displayModifyUser() {
+		mainPanel.clear();
+		mainPanel.add(new ModifyUserUiBinder());
+	}
+
+	public void displayUsers() {
+		mainPanel.clear();
+		mainPanel.add(new DisplayUsersUiBinder(eventBus));
 	}
 
 	/**
@@ -92,7 +127,7 @@ public class SchoolWebappController {
 	public void displayFavouriteScreen(int userId) {
 		// TODO deal with profiles
 		if (1 == userId) {
-			displayCreateUser();
+			displayUsers();
 		} else {
 			// TODO redirect to the good panel
 			setErrorText(userId + "Favourite screen not yet implemented.");

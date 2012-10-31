@@ -3,7 +3,6 @@
  */
 package fr.min.school.webapp.client.view.admin.user;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -55,6 +54,15 @@ public class ModifyUserUiBinder extends Composite {
 	@UiField
 	TextBox passwordTextField;
 
+	@UiField
+	TextBox nameTextField;
+
+	@UiField
+	TextBox firstnameTextField;
+
+	@UiField
+	TextBox emailTextField;
+
 	private LinkedHashMap<String, ProfileDTO> profilesMap;
 
 	interface CreateUserUiBinderUiBinder extends
@@ -99,10 +107,11 @@ public class ModifyUserUiBinder extends Composite {
 		UserDTO userDTO = new UserDTO();
 		userDTO.setLogin(loginTextField.getText());
 		userDTO.setPassword(passwordTextField.getText());
-		List<ProfileDTO> profiles = new ArrayList<ProfileDTO>();
-		profiles.add(profilesMap.get(profileListBox.getValue(profileListBox
-				.getSelectedIndex())));
-		userDTO.setProfiles(profiles);
+		userDTO.setFirstname(firstnameTextField.getText());
+		userDTO.setName(nameTextField.getText());
+		userDTO.setEmail(emailTextField.getText());
+		userDTO.setProfile(profilesMap.get(profileListBox
+				.getValue(profileListBox.getSelectedIndex())));
 		ModifyUserUiBinder.userService.updateUser(userDTO,
 				new AsyncCallback<Void>() {
 

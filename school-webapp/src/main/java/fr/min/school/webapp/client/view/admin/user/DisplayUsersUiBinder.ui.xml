@@ -8,8 +8,8 @@
 		}
 	</ui:style>
 	<g:DecoratorPanel>
-		<g:VerticalPanel height="204px" width="224px" horizontalAlignment="ALIGN_CENTER">
-			<p1:DataGrid width="250px" height="200px" ui:field="dataGrid"/>
+		<g:VerticalPanel height="300px" width="800px" horizontalAlignment="ALIGN_CENTER">
+			<p1:DataGrid height="300px" width="800px" ui:field="dataGrid"/>
 			<g:HorizontalPanel>
 				<g:Button ui:field="createUserButton">Ajouter</g:Button>
 				<g:Button ui:field="modifyUserButton">Modifier</g:Button>

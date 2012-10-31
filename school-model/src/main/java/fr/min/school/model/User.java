@@ -3,12 +3,10 @@
  */
 package fr.min.school.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 /**
  * A school application user.
@@ -30,9 +28,9 @@ public class User implements Model {
 	private int id;
 
 	/**
-	 * Profiles the user belongs to.
+	 * Profile the user belongs to.
 	 */
-	private List<Profile> profiles;
+	private Profile profile;
 
 	/**
 	 * The user login.
@@ -43,6 +41,21 @@ public class User implements Model {
 	 * The user password.
 	 */
 	private String password;
+
+	/**
+	 * The user firstname.
+	 */
+	private String firstname;
+
+	/**
+	 * The user name.
+	 */
+	private String name;
+
+	/**
+	 * The user email.
+	 */
+	private String email;
 
 	/**
 	 * Return the User id.
@@ -70,19 +83,19 @@ public class User implements Model {
 	 * 
 	 * @return the profiles
 	 */
-	@ManyToMany
-	public List<Profile> getProfiles() {
-		return profiles;
+	@ManyToOne
+	public Profile getProfile() {
+		return profile;
 	}
 
 	/**
-	 * Set the User profiles.
+	 * Set the User profile.
 	 * 
-	 * @param profiles
-	 *            the profiles to set
+	 * @param profile
+	 *            the profile to set
 	 */
-	public void setProfiles(final List<Profile> profiles) {
-		this.profiles = profiles;
+	public void setProfile(final Profile profile) {
+		this.profile = profile;
 	}
 
 	/**
@@ -121,6 +134,63 @@ public class User implements Model {
 	 */
 	public void setPassword(final String password) {
 		this.password = password;
+	}
+
+	/**
+	 * Set the User email.
+	 * 
+	 * @param email
+	 *            the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	/**
+	 * Return the User email.
+	 * 
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * Set the User firstname.
+	 * 
+	 * @param firstname
+	 *            the firstname to set
+	 */
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	/**
+	 * Return the User firstname.
+	 * 
+	 * @return the firstname
+	 */
+	public String getFirstname() {
+		return firstname;
+	}
+
+	/**
+	 * Set the User name.
+	 * 
+	 * @param name
+	 *            the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * Return the User name.
+	 * 
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
 	}
 
 }
