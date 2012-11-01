@@ -1,4 +1,4 @@
-package fr.min.school.webapp.client.authentication;
+package fr.min.school.webapp.client.service.authentication;
 
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;

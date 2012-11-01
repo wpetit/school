@@ -25,11 +25,11 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.ListDataProvider;
 
 import fr.min.school.model.dto.UserDTO;
-import fr.min.school.webapp.client.admin.user.UserService;
-import fr.min.school.webapp.client.admin.user.UserServiceAsync;
 import fr.min.school.webapp.client.event.admin.user.UserCreationQueryEvent;
 import fr.min.school.webapp.client.event.admin.user.UserDeletionQueryEvent;
 import fr.min.school.webapp.client.event.admin.user.UserModificationQueryEvent;
+import fr.min.school.webapp.client.service.admin.user.UserService;
+import fr.min.school.webapp.client.service.admin.user.UserServiceAsync;
 
 /**
  * @author Wilfried Petit

@@ -19,12 +19,12 @@
 	<!-- Servlets -->
 	<servlet>
 		<servlet-name>authenticationServlet</servlet-name>
-		<servlet-class>fr.min.school.webapp.server.authentication.AuthenticationServiceImpl</servlet-class>
+		<servlet-class>fr.min.school.webapp.server.service.authentication.AuthenticationServiceImpl</servlet-class>
 	</servlet>
 	
 	<servlet>
 		<servlet-name>userAdminServlet</servlet-name>
-		<servlet-class>fr.min.school.webapp.server.user.UserServiceImpl</servlet-class>
+		<servlet-class>fr.min.school.webapp.server.service.user.UserServiceImpl</servlet-class>
 	</servlet>
 
 	<servlet-mapping>

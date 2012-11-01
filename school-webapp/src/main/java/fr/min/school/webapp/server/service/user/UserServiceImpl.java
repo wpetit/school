@@ -1,4 +1,4 @@
-package fr.min.school.webapp.server.user;
+package fr.min.school.webapp.server.service.user;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import fr.min.school.business.UserBusiness;
 import fr.min.school.model.dto.ProfileDTO;
 import fr.min.school.model.dto.UserDTO;
-import fr.min.school.webapp.client.admin.user.UserService;
+import fr.min.school.webapp.client.service.admin.user.UserService;
 
 /**
  * The server side implementation of the RPC service.
@@ -46,7 +46,7 @@ public class UserServiceImpl extends RemoteServiceServlet implements
 	}
 
 	/**
-	 * @see fr.min.school.webapp.client.admin.user.UserService#retrieveUsers()
+	 * @see fr.min.school.webapp.client.service.admin.user.UserService#retrieveUsers()
 	 */
 	@Override
 	public List<UserDTO> retrieveUsers() {

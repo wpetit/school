@@ -8,8 +8,8 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.ServiceDefTarget;
 
 import fr.min.school.model.dto.UserDTO;
-import fr.min.school.webapp.client.authentication.AuthenticationService;
-import fr.min.school.webapp.client.authentication.AuthenticationServiceAsync;
+import fr.min.school.webapp.client.service.authentication.AuthenticationService;
+import fr.min.school.webapp.client.service.authentication.AuthenticationServiceAsync;
 import fr.min.school.webapp.shared.AuthenticationVerifier;
 
 /**

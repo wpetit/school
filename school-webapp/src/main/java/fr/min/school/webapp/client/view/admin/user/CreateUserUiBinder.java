@@ -22,9 +22,9 @@ import com.google.gwt.user.client.ui.Widget;
 
 import fr.min.school.model.dto.ProfileDTO;
 import fr.min.school.model.dto.UserDTO;
-import fr.min.school.webapp.client.admin.user.UserService;
-import fr.min.school.webapp.client.admin.user.UserServiceAsync;
 import fr.min.school.webapp.client.event.admin.user.UserCreationEvent;
+import fr.min.school.webapp.client.service.admin.user.UserService;
+import fr.min.school.webapp.client.service.admin.user.UserServiceAsync;
 
 /**
  * @author Wilfried Petit

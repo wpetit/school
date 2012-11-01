@@ -1,4 +1,4 @@
-package fr.min.school.webapp.client.admin.user;
+package fr.min.school.webapp.client.service.admin.user;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package fr.min.school.webapp.server.authentication;
+package fr.min.school.webapp.server.service.authentication;
 
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -7,7 +7,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import fr.min.school.business.UserBusiness;
 import fr.min.school.model.dto.UserDTO;
-import fr.min.school.webapp.client.authentication.AuthenticationService;
+import fr.min.school.webapp.client.service.authentication.AuthenticationService;
 import fr.min.school.webapp.shared.AuthenticationVerifier;
 
 /**
