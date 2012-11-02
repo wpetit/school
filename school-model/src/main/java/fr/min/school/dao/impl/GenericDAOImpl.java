@@ -46,18 +46,8 @@ public abstract class GenericDAOImpl<T, PK> implements GenericDAO<T, PK> {
 	}
 
 	@Override
-	public void remove(T o) {
-		entityManager.remove(o);
-	}
-
-	@Override
 	public void save(T o) {
 		entityManager.merge(o);
-	}
-
-	@Override
-	public void refresh(T o) {
-		entityManager.refresh(o);
 	}
 
 	@Override

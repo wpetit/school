@@ -57,4 +57,12 @@ public interface UserBusiness extends Business {
 	 */
 	List<UserDTO> retrieveUsers();
 
+	/**
+	 * Delete a user from a userDTO
+	 * 
+	 * @param userDTO
+	 *            the user.
+	 */
+	void deleteUser(UserDTO userDTO);
+
 }

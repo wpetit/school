@@ -35,10 +35,10 @@ public interface UserDAO extends GenericDAO<User, Integer> {
 	User findUserByLoginPassword(final String login, final String password);
 
 	/**
-	 * Create a user.
+	 * Delete the user with the id given.
 	 * 
-	 * @param user
-	 *            the user to create.
+	 * @param id
+	 *            the user id
 	 */
-	void createUser(final User user);
+	void remove(int id);
 }

@@ -37,8 +37,7 @@ public class UserDAOImpl extends GenericDAOImpl<User, Integer> implements
 	}
 
 	@Override
-	public void createUser(final User user) {
-		entityManager.persist(user);
+	public void remove(int id) {
+		entityManager.remove(entityManager.find(User.class, id));
 	}
-
 }

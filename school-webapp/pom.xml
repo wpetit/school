@@ -30,8 +30,7 @@
 
 		<dependency>
 			<groupId>fr.min.school</groupId>
-			<artifactId>school-business</artifactId>
-			<type>java-source</type>
+			<artifactId>school-model</artifactId>
 		</dependency>
 
 		<dependency>
@@ -52,6 +51,11 @@
 		<dependency>
 			<groupId>com.smartgwt</groupId>
 			<artifactId>smartgwt</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
 		</dependency>
 
 		<dependency>

@@ -9,6 +9,6 @@ import com.google.gwt.event.shared.EventHandler;
  * @author Wilfried Petit
  * 
  */
-public interface UserDeletionQueryEventHandler extends EventHandler {
-	void onUserDeletionQuery(UserDeletionQueryEvent event);
+public interface UserDeletionEventHandler extends EventHandler {
+	void onUserDeletion(UserDeletionEvent event);
 }

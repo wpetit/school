@@ -46,4 +46,12 @@ public interface UserService extends RemoteService {
 	 */
 	List<UserDTO> retrieveUsers();
 
+	/**
+	 * Delete the user given.
+	 * 
+	 * @param userDTO
+	 *            the user to delete.
+	 */
+	void deleteUser(UserDTO userDTO);
+
 }

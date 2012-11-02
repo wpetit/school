@@ -50,14 +50,25 @@ public class UserBusinessImpl extends AbstractBusiness implements UserBusiness {
 
 	@Override
 	public void createUser(final UserDTO userDTO) {
-		User user = mapper.map(userDTO, User.class);
-		userDAO.createUser(user);
+		if (userDTO != null) {
+			User user = mapper.map(userDTO, User.class);
+			userDAO.persist(user);
+		}
 	}
 
 	@Override
 	public void updateUser(final UserDTO userDTO) {
-		User user = mapper.map(userDTO, User.class);
-		userDAO.refresh(user);
+		if (userDTO != null) {
+			User user = mapper.map(userDTO, User.class);
+			userDAO.save(user);
+		}
+	}
+
+	@Override
+	public void deleteUser(final UserDTO userDTO) {
+		if (userDTO != null) {
+			userDAO.remove(userDTO.getId());
+		}
 	}
 
 	@Override

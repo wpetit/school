@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -21,6 +22,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 import fr.min.school.model.dto.ProfileDTO;
 import fr.min.school.model.dto.UserDTO;
+import fr.min.school.webapp.client.event.admin.user.UserModificationEvent;
 import fr.min.school.webapp.client.service.admin.user.UserService;
 import fr.min.school.webapp.client.service.admin.user.UserServiceAsync;
 
@@ -30,8 +32,8 @@ import fr.min.school.webapp.client.service.admin.user.UserServiceAsync;
  */
 public class ModifyUserUiBinder extends Composite {
 
-	private static CreateUserUiBinderUiBinder uiBinder = GWT
-			.create(CreateUserUiBinderUiBinder.class);
+	private static ModifyUserUiBinderUiBinder uiBinder = GWT
+			.create(ModifyUserUiBinderUiBinder.class);
 
 	/**
 	 * Create a remote service proxy to talk to the server-side User service.
@@ -63,9 +65,13 @@ public class ModifyUserUiBinder extends Composite {
 	@UiField
 	TextBox emailTextField;
 
+	private UserDTO userDTO;
+
+	private HandlerManager eventBus;
+
 	private LinkedHashMap<String, ProfileDTO> profilesMap;
 
-	interface CreateUserUiBinderUiBinder extends
+	interface ModifyUserUiBinderUiBinder extends
 			UiBinder<Widget, ModifyUserUiBinder> {
 	}
 
@@ -78,7 +84,9 @@ public class ModifyUserUiBinder extends Composite {
 	 * depending on the widget that is used, it may be necessary to implement
 	 * HasHTML instead of HasText.
 	 */
-	public ModifyUserUiBinder() {
+	public ModifyUserUiBinder(HandlerManager eventBus, UserDTO userDTO) {
+		this.eventBus = eventBus;
+		this.userDTO = userDTO;
 		initWidget(ModifyUserUiBinder.uiBinder.createAndBindUi(this));
 		profilesMap = new LinkedHashMap<String, ProfileDTO>();
 		ModifyUserUiBinder.userService
@@ -100,11 +108,25 @@ public class ModifyUserUiBinder extends Composite {
 						informationsLabel.setText(caught.getMessage());
 					}
 				});
+		initFields();
+	}
+
+	void initFields() {
+		loginTextField.setText(userDTO.getLogin());
+		passwordTextField.setText(userDTO.getPassword());
+		firstnameTextField.setText(userDTO.getFirstname());
+		nameTextField.setText(userDTO.getName());
+		emailTextField.setText(userDTO.getEmail());
+		for (int i = 0; i < profileListBox.getItemCount(); i++) {
+			if (profileListBox.getItemText(i).equals(
+					userDTO.getProfile().getName())) {
+				profileListBox.setSelectedIndex(i);
+			}
+		}
 	}
 
 	@UiHandler("button")
 	void onButtonClick(ClickEvent event) {
-		UserDTO userDTO = new UserDTO();
 		userDTO.setLogin(loginTextField.getText());
 		userDTO.setPassword(passwordTextField.getText());
 		userDTO.setFirstname(firstnameTextField.getText());
@@ -122,7 +144,7 @@ public class ModifyUserUiBinder extends Composite {
 
 					@Override
 					public void onSuccess(Void result) {
-						informationsLabel.setText("user update successfully.");
+						eventBus.fireEvent(new UserModificationEvent());
 					}
 				});
 	}

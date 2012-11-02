@@ -9,10 +9,15 @@ import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+import fr.min.school.model.dto.UserDTO;
 import fr.min.school.webapp.client.event.admin.user.UserCreationEvent;
 import fr.min.school.webapp.client.event.admin.user.UserCreationEventHandler;
 import fr.min.school.webapp.client.event.admin.user.UserCreationQueryEvent;
 import fr.min.school.webapp.client.event.admin.user.UserCreationQueryEventHandler;
+import fr.min.school.webapp.client.event.admin.user.UserDeletionEvent;
+import fr.min.school.webapp.client.event.admin.user.UserDeletionEventHandler;
+import fr.min.school.webapp.client.event.admin.user.UserModificationEvent;
+import fr.min.school.webapp.client.event.admin.user.UserModificationEventHandler;
 import fr.min.school.webapp.client.event.admin.user.UserModificationQueryEvent;
 import fr.min.school.webapp.client.event.admin.user.UserModificationQueryEventHandler;
 import fr.min.school.webapp.client.event.authentication.SuccessfulAuthenticationEvent;
@@ -65,7 +70,7 @@ public class SchoolWebappController {
 					@Override
 					public void onUserModificationQuery(
 							UserModificationQueryEvent event) {
-						displayModifyUser();
+						displayModifyUser(event.getUserDTO());
 					}
 				});
 
@@ -73,6 +78,22 @@ public class SchoolWebappController {
 				new UserCreationEventHandler() {
 					@Override
 					public void onUserCreation(UserCreationEvent event) {
+						displayUsers();
+					}
+				});
+
+		eventBus.addHandler(UserModificationEvent.TYPE,
+				new UserModificationEventHandler() {
+					@Override
+					public void onUserModification(UserModificationEvent event) {
+						displayUsers();
+					}
+				});
+
+		eventBus.addHandler(UserDeletionEvent.TYPE,
+				new UserDeletionEventHandler() {
+					@Override
+					public void onUserDeletion(UserDeletionEvent event) {
 						displayUsers();
 					}
 				});
@@ -98,9 +119,9 @@ public class SchoolWebappController {
 		mainPanel.add(new CreateUserUiBinder(eventBus));
 	}
 
-	public void displayModifyUser() {
+	public void displayModifyUser(UserDTO userDTO) {
 		mainPanel.clear();
-		mainPanel.add(new ModifyUserUiBinder());
+		mainPanel.add(new ModifyUserUiBinder(eventBus, userDTO));
 	}
 
 	public void displayUsers() {

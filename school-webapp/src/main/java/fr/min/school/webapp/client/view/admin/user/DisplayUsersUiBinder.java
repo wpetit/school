@@ -3,6 +3,7 @@
  */
 package fr.min.school.webapp.client.view.admin.user;
 
+import java.util.Comparator;
 import java.util.List;
 
 import com.google.gwt.cell.client.CheckboxCell;
@@ -16,18 +17,22 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.cellview.client.Column;
+import com.google.gwt.user.cellview.client.ColumnSortEvent.ListHandler;
 import com.google.gwt.user.cellview.client.DataGrid;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.view.client.DefaultSelectionEventManager;
 import com.google.gwt.view.client.ListDataProvider;
+import com.google.gwt.view.client.SingleSelectionModel;
 
 import fr.min.school.model.dto.UserDTO;
 import fr.min.school.webapp.client.event.admin.user.UserCreationQueryEvent;
-import fr.min.school.webapp.client.event.admin.user.UserDeletionQueryEvent;
+import fr.min.school.webapp.client.event.admin.user.UserDeletionEvent;
 import fr.min.school.webapp.client.event.admin.user.UserModificationQueryEvent;
+import fr.min.school.webapp.client.event.information.ErrorEvent;
 import fr.min.school.webapp.client.service.admin.user.UserService;
 import fr.min.school.webapp.client.service.admin.user.UserServiceAsync;
 
@@ -45,6 +50,8 @@ public class DisplayUsersUiBinder extends Composite {
 	 */
 	private static final UserServiceAsync userService = GWT
 			.create(UserService.class);
+
+	private SingleSelectionModel<UserDTO> selectionModel;
 
 	@UiField
 	Button createUserButton;
@@ -77,7 +84,7 @@ public class DisplayUsersUiBinder extends Composite {
 		dataGrid = new DataGrid<UserDTO>(new UserDTOProvidesKey());
 		dataGrid.setEmptyTableWidget(new Label("No users found."));
 
-		initTableColumns();
+		initTable();
 		dataProvider.addDataDisplay(dataGrid);
 
 		DisplayUsersUiBinder.userService
@@ -106,18 +113,45 @@ public class DisplayUsersUiBinder extends Composite {
 
 	@UiHandler("modifyUserButton")
 	void onModifyUserButtonClick(ClickEvent event) {
-		eventBus.fireEvent(new UserModificationQueryEvent());
+		UserDTO userSelected = selectionModel.getSelectedObject();
+		eventBus.fireEvent(new UserModificationQueryEvent(userSelected));
 	}
 
 	@UiHandler("deleteUserButton")
 	void onDeleteUserButtonClick(ClickEvent event) {
-		eventBus.fireEvent(new UserDeletionQueryEvent());
+		UserDTO userSelected = selectionModel.getSelectedObject();
+		DisplayUsersUiBinder.userService.deleteUser(userSelected,
+				new AsyncCallback<Void>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						eventBus.fireEvent(new ErrorEvent(caught));
+					}
+
+					@Override
+					public void onSuccess(Void result) {
+						eventBus.fireEvent(new UserDeletionEvent());
+					}
+				});
 	}
 
 	/**
 	 * Add the columns to the table.
 	 */
-	private void initTableColumns() {
+	private void initTable() {
+
+		// Add a selection model so we can select cells.
+		selectionModel = new SingleSelectionModel<UserDTO>(
+				new UserDTOProvidesKey());
+		dataGrid.setSelectionModel(selectionModel,
+				DefaultSelectionEventManager.<UserDTO> createCheckboxManager());
+
+		// Attach a column sort handler to the ListDataProvider to sort the
+		// list.
+		ListHandler<UserDTO> sortHandler = new ListHandler<UserDTO>(
+				dataProvider.getList());
+		dataGrid.addColumnSortHandler(sortHandler);
+
 		// Checkbox column. This table will uses a checkbox column for
 		// selection.
 		// Alternatively, you can call dataGrid.setSelectionEnabled(true) to
@@ -128,7 +162,7 @@ public class DisplayUsersUiBinder extends Composite {
 			@Override
 			public Boolean getValue(UserDTO object) {
 				// Get the value from the selection model.
-				return true;// selectionModel.isSelected(object);
+				return selectionModel.isSelected(object);
 			}
 		};
 		dataGrid.addColumn(checkColumn, SafeHtmlUtils.fromSafeConstant("<br/>"));
@@ -142,10 +176,17 @@ public class DisplayUsersUiBinder extends Composite {
 				return String.valueOf(object.getId());
 			}
 		};
+		sortHandler.setComparator(idColumn, new Comparator<UserDTO>() {
+			@Override
+			public int compare(UserDTO o1, UserDTO o2) {
+				return o1.getId() - o2.getId();
+			}
+		});
+		idColumn.setSortable(true);
 		dataGrid.addColumn(idColumn, "Id");
 		dataGrid.setColumnWidth(idColumn, 20, Unit.PCT);
 
-		// First name.
+		// Login.
 		Column<UserDTO, String> loginColumn = new Column<UserDTO, String>(
 				new TextCell()) {
 			@Override
@@ -153,6 +194,13 @@ public class DisplayUsersUiBinder extends Composite {
 				return object.getLogin();
 			}
 		};
+		sortHandler.setComparator(loginColumn, new Comparator<UserDTO>() {
+			@Override
+			public int compare(UserDTO o1, UserDTO o2) {
+				return o1.getLogin().compareTo(o2.getLogin());
+			}
+		});
+		loginColumn.setSortable(true);
 		dataGrid.addColumn(loginColumn, "Login");
 		dataGrid.setColumnWidth(loginColumn, 50, Unit.PCT);
 
@@ -164,6 +212,13 @@ public class DisplayUsersUiBinder extends Composite {
 				return object.getFirstname();
 			}
 		};
+		sortHandler.setComparator(firstnameColumn, new Comparator<UserDTO>() {
+			@Override
+			public int compare(UserDTO o1, UserDTO o2) {
+				return o1.getFirstname().compareTo(o2.getFirstname());
+			}
+		});
+		firstnameColumn.setSortable(true);
 		dataGrid.addColumn(firstnameColumn, "Prénom");
 		dataGrid.setColumnWidth(firstnameColumn, 50, Unit.PCT);
 
@@ -175,6 +230,13 @@ public class DisplayUsersUiBinder extends Composite {
 				return object.getName();
 			}
 		};
+		sortHandler.setComparator(nameColumn, new Comparator<UserDTO>() {
+			@Override
+			public int compare(UserDTO o1, UserDTO o2) {
+				return o1.getName().compareTo(o2.getName());
+			}
+		});
+		nameColumn.setSortable(true);
 		dataGrid.addColumn(nameColumn, "Nom");
 		dataGrid.setColumnWidth(nameColumn, 50, Unit.PCT);
 
@@ -186,19 +248,37 @@ public class DisplayUsersUiBinder extends Composite {
 				return object.getEmail();
 			}
 		};
+		sortHandler.setComparator(emailColumn, new Comparator<UserDTO>() {
+			@Override
+			public int compare(UserDTO o1, UserDTO o2) {
+				return o1.getEmail().compareTo(o2.getEmail());
+			}
+		});
+		emailColumn.setSortable(true);
 		dataGrid.addColumn(emailColumn, "Email");
 		dataGrid.setColumnWidth(emailColumn, 50, Unit.PCT);
 
-		// Column<UserDTO, List<ProfileDTO>> categoryColumn = new
-		// Column<UserDTO, List<ProfileDTO>>(
-		// new SelectionCell()) {
-		// @Override
-		// public List<ProfileDTO> getValue(UserDTO object) {
-		// return object.getProfiles();
-		// }
-		// };
-		// dataGrid.addColumn(categoryColumn, "Profils");
-		// dataGrid.setColumnWidth(categoryColumn, 130, Unit.PX);
-
+		// Profil.
+		Column<UserDTO, String> profilColumn = new Column<UserDTO, String>(
+				new TextCell()) {
+			@Override
+			public String getValue(UserDTO object) {
+				if (object.getProfile() != null) {
+					return object.getProfile().getName();
+				} else {
+					return null;
+				}
+			}
+		};
+		sortHandler.setComparator(profilColumn, new Comparator<UserDTO>() {
+			@Override
+			public int compare(UserDTO o1, UserDTO o2) {
+				return o1.getProfile().getName()
+						.compareTo(o2.getProfile().getName());
+			}
+		});
+		profilColumn.setSortable(true);
+		dataGrid.addColumn(profilColumn, "Profil");
+		dataGrid.setColumnWidth(profilColumn, 50, Unit.PCT);
 	}
 }

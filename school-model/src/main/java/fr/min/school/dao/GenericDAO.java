@@ -24,14 +24,6 @@ public interface GenericDAO<T, PK> {
 	public void flush();
 
 	/**
-	 * Refresh object persistant
-	 * 
-	 * @param o
-	 * @throws DataAccessException
-	 */
-	public void refresh(T o);
-
-	/**
 	 * Save object persistant
 	 * 
 	 * @param o
@@ -49,17 +41,8 @@ public interface GenericDAO<T, PK> {
 	public void persist(T o);
 
 	/**
-	 * Supprime un objet en base
-	 * 
-	 * @param o
-	 *            l'objet persistant à supprimer
-	 * @throws DataAccessException
-	 */
-	public void remove(T o);
-
-	/**
-	 * Charge un objet persistant à partir d'un id, retourne null si il
-	 * n'existe pas
+	 * Charge un objet persistant à partir d'un id, retourne null si il n'existe
+	 * pas
 	 * 
 	 * @param id
 	 *            l'id de l'objet persistant
@@ -69,8 +52,8 @@ public interface GenericDAO<T, PK> {
 	public T find(PK id);
 
 	/**
-	 * Charge un objet persistant à partir d'un id, retourne une exception si
-	 * il n'existe pas
+	 * Charge un objet persistant à partir d'un id, retourne une exception si il
+	 * n'existe pas
 	 * 
 	 * @param id
 	 *            l'id de l'objet persistant

@@ -45,15 +45,20 @@ public class UserServiceImpl extends RemoteServiceServlet implements
 		userBusiness.updateUser(userDTO);
 	}
 
-	/**
-	 * @see fr.min.school.webapp.client.service.admin.user.UserService#retrieveUsers()
-	 */
 	@Override
 	public List<UserDTO> retrieveUsers() {
 		WebApplicationContext ctx = WebApplicationContextUtils
 				.getWebApplicationContext(getServletContext());
 		UserBusiness userBusiness = (UserBusiness) ctx.getBean("userBusiness");
 		return userBusiness.retrieveUsers();
+	}
+
+	@Override
+	public void deleteUser(UserDTO userDTO) {
+		WebApplicationContext ctx = WebApplicationContextUtils
+				.getWebApplicationContext(getServletContext());
+		UserBusiness userBusiness = (UserBusiness) ctx.getBean("userBusiness");
+		userBusiness.deleteUser(userDTO);
 	}
 
 }
